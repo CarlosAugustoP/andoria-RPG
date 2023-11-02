@@ -3,6 +3,8 @@
 #include <time.h>
 #include <unistd.h> 
 #include <string.h>
+#include <conio.h>
+
 typedef struct  {
     char nome[20];
     int hp;
@@ -10,7 +12,7 @@ typedef struct  {
 }Oponente;
 
 typedef struct arv {
-  char texto [500];
+  char *texto;
   int id;
   struct arv *esq;
   struct arv *dir;
@@ -19,9 +21,22 @@ typedef struct arv {
 int combat (int seuHp, Oponente oponente);
 int gerarNumeroAleatorio(int inicio, int limite);
 void inserir(Arv **t, char texto [600], int id);
+void game();
+
+int choice; // variavel global que sera usada na recursao de game()
 
 int main() {
     int opcao;
+
+    Arv *history = NULL;
+
+    inserir(&history, "Checkpoint 1", 10);
+    inserir(&history, "Checkpoint 1.1", 6);
+    inserir(&history, "Checkpoint 1.2", 15);
+    inserir(&history, "Checkpoint 1.1.1", 4);
+    inserir(&history, "Checkpoint 1.1.2", 8);
+    inserir(&history, "Checkpoint 1.2.1", 12);
+    inserir(&history, "Checkpoint 1.2.2", 17);
     
     while (1) {
    
@@ -51,6 +66,8 @@ int main() {
                 break;
             case 2:
                 printf("Você escolheu jogar.\n");
+                game(&history);
+                getch();
                 break;
             case 3:
                 printf("Você escolheu historias passadas.\n");
@@ -66,22 +83,39 @@ int main() {
     return 0;
 }
 
-void inserir(Arv **t, char texto [600], int id) {
-  if (*t == NULL) {
-    *t = (Arv *)malloc(sizeof(Arv));
-    (*t)->esq = NULL;
-    (*t)->dir = NULL;
-    (*t)->id = id;
-    strcpy((*t)->texto, texto);
-  } else {
-    if (id< (*t)->id) {
-      inserir(&(*t)->esq, texto,id);
+void inserir(Arv **t, char* texto, int id) {
+    if (*t == NULL) {
+        *t = (Arv *)malloc(sizeof(Arv));
+        (*t)->esq = NULL;
+        (*t)->dir = NULL;
+        (*t)->id = id;
+        (*t)->texto = (char*) malloc(strlen(texto)+1);
+        strcpy((*t)->texto, texto);
+    } else {
+        if (id < (*t)->id) {
+            inserir(&(*t)->esq, texto,id);
+        }
+        if (id > (*t)->id) {
+            inserir(&(*t)->dir,texto, id);
+        }
     }
-    if (id > (*t)->id) {
-      inserir(&(*t)->dir,texto, id);
+}
+
+void game(Arv **t){
+  if(*t != NULL){
+    printf("%s\n", (*t)->texto);
+    if((*t)->esq != NULL){
+      printf("\nVocê gostaria de ir para esquerda(1) ou direita(2)?");
+      scanf("%d", &choice);
+      if(choice == 1){
+        game(&((*t)->esq));
+      } else {
+        game(&((*t)->dir));
+      }
     }
   }
 }
+
 int gerarNumeroAleatorio(int inicio, int limite) {
     srand(time(NULL));
     int numeroAleatorio = rand();
