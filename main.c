@@ -3,22 +3,44 @@
 #include <time.h>
 #include <unistd.h> 
 
-
 typedef struct  {
     char nome[20];
     int hp;
 
 }Oponente;
 
-int combat (int seuHp, Oponente oponente);
+typedef struct arv {
+  char texto [500];
+  int id;
+  struct arv *esq;
+  struct arv *dir;
+} Arv;
 
+int combat (int seuHp, Oponente oponente);
 int gerarNumeroAleatorio(int inicio, int limite);
+void inserir(Arv **t, char texto [600], int id);
 
 int main(void) {
   printf("Hello World\n");
   return 0;
 }
 
+void inserir(Arv **t, char texto [600], int id) {
+  if (*t == NULL) {
+    *t = (Arv *)malloc(sizeof(Arv));
+    (*t)->esq = NULL;
+    (*t)->dir = NULL;
+    (*t)->id = id;
+    strcpy((*t)->texto, texto);
+  } else {
+    if (id< (*t)->id) {
+      inserir(&(*t)->esq, texto,id);
+    }
+    if (id > (*t)->id) {
+      inserir(&(*t)->dir,texto, id);
+    }
+  }
+}
 int gerarNumeroAleatorio(int inicio, int limite) {
     srand(time(NULL));
     int numeroAleatorio = rand();
@@ -80,7 +102,7 @@ int combat (int seuHp, Oponente oponente){
                 }if (!defesa){
                     danoTomado = gerarNumeroAleatorio(3,8);
                     printf("Agora é a vez do inimigo!\n Você perdeu %d de hp!",danoTomado );
-                    seuHp = seuHp- danoTomado;
+                    seuHp = seuHp- danoTomado;//acho que isso está na ordem errada
                   
             } else {
                  danoTomado = gerarNumeroAleatorio(3,8);
@@ -96,6 +118,7 @@ int combat (int seuHp, Oponente oponente){
         return 1;
     }
 }
+
 /** 
  * carlos 
  * pires 
