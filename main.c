@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h> 
-
+#include <string.h>
 typedef struct  {
     char nome[20];
     int hp;
@@ -20,9 +20,50 @@ int combat (int seuHp, Oponente oponente);
 int gerarNumeroAleatorio(int inicio, int limite);
 void inserir(Arv **t, char texto [600], int id);
 
-int main(void) {
-  printf("Hello World\n");
-  return 0;
+int main() {
+    int opcao;
+    
+    while (1) {
+   
+        #ifdef _WIN32 
+            system("cls");
+        #else 
+            system("clear");
+        #endif
+ 
+        printf(" /   /   /   /   /   /   /   /   /   /   /\n");
+        printf("/   /   /   /   /   /   /   /   /   /   /   /\n");
+        printf("A   N   D   O   R   I   A\n");
+        printf(" /   /   /   /   /   /   /   /   /   /   /   /\n");
+        printf("/   /   /   /   /   /   /   /   /   /   /   /\n");
+        
+        printf("1 - Entrar no jogo\n");
+        printf("2 - Jogar\n");
+        printf("3 - Histórias passadas\n");
+        printf("4 - Sair\n");
+        
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+        Oponente oponente;
+        switch (opcao) {
+            case 1:
+                printf("Você escolheu entrar no jogo.\n");
+                break;
+            case 2:
+                printf("Você escolheu jogar.\n");
+                break;
+            case 3:
+                printf("Você escolheu historias passadas.\n");
+                break;
+            case 4:
+                printf("Você escolheu sair do jogo. Ate logo!\n");
+                return 0;
+            default:
+                printf("Opcao invalida. Por favor, escolha uma opcao valida.\n");
+        }
+    }
+    
+    return 0;
 }
 
 void inserir(Arv **t, char texto [600], int id) {
@@ -55,7 +96,7 @@ int combat (int seuHp, Oponente oponente){
     int defesa;
     int acao; 
     
-    char vetorDialogo[9][80] = {
+    char vetorDialogo[9][100] = {
             "%s rosnando, pronto para o próximo ataque, te encara com intensidade.",
             "Com um olhar feroz, %s se prepara para lançar seu próximo ataque.",
             "%s mantém seu olhar fixo em você, antecipando o próximo confronto.",
