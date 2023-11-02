@@ -53,7 +53,7 @@ int combat (int seuHp, Oponente oponente){
             printf("Rapidamente! Qual a sua ação? 1: ataque 2: defesa\n ");
             if (scanf("%d",&acao)!=1){
                 danoTomado = gerarNumeroAleatorio(1,10);
-                printf("Você não inseriu um comando a tempo!\n Você perdeu %d de vida!" , danoTomado);
+                printf("Você não inseriu um comando a tempo!\n Você perdeu %d de vida!\n" , danoTomado);
                 seuHp = seuHp - danoTomado;
             
             }else{
@@ -63,24 +63,39 @@ int combat (int seuHp, Oponente oponente){
                     switch (acao){
                     case 1:
                             danoTomado = gerarNumeroAleatorio(1,10);
-                            printf("Você atacou o inimigo com sucesso, gerando %d de dano!", danoTomado);
+                            printf("Você atacou o inimigo com sucesso, gerando %d de dano!\n", danoTomado);
                             oponente.hp = oponente.hp - danoTomado;
                             break;
                     case 2:
-                            defesa = gerarNumeroAleatorio(0,1);
+                            defesa = gerarNumeroAleatorio(-1,1);
+                            danoTomado = gerarNumeroAleatorio(3,5);
                             hpRecuperado = gerarNumeroAleatorio (1,4);
                             if (defesa){
-                                printf("Você defendeu com sucesso e recuperou %d de hp",hpRecuperado);
+                                printf("Você defendeu com sucesso e recuperou %d de hp\n",hpRecuperado);
                                 seuHp = seuHp+hpRecuperado;
-                        }                     
-                }   
+                            }else{
+                                printf("Você falhou na sua defesa, e perdeu %d de hp\n", danoTomado);
+                                seuHp = seuHp - danoTomado;
+                            }                     
+                }if (!defesa){
+                    danoTomado = gerarNumeroAleatorio(3,8);
+                    printf("Agora é a vez do inimigo!\n Você perdeu %d de hp!",danoTomado );
+                    seuHp = seuHp- danoTomado;
+                  
             } else {
-                printf("Tempo esgotado! O oponente ataca.\n");
+                 danoTomado = gerarNumeroAleatorio(3,8);
+                 printf("Tempo esgotado! O oponente ataca.\n");
+                 seuHp = seuHp - danoTomado;
             }
         }       
     }
+    }
+    if (seuHp<0){
+        return 0;
+    }else{
+        return 1;
+    }
 }
-
 /** 
  * carlos 
  * pires 
