@@ -3,7 +3,11 @@
 #include <time.h>
 #include <unistd.h> 
 #include <string.h>
-#include <conio.h>
+#ifdef _WIN32
+    #include <conio.h>
+#endif
+
+int karma=0;
 
 typedef struct  {
     char nome[20];
@@ -20,9 +24,9 @@ typedef struct arv {
 
 int combat (int seuHp, Oponente oponente);
 int gerarNumeroAleatorio(int inicio, int limite);
-void inserir(Arv **t, char texto [600], int id);
+void inserir(Arv **t, char texto [1000], int id);
 void game();
-
+void clear();
 int choice; // variavel global que sera usada na recursao de game()
 
 int main() {
@@ -30,21 +34,17 @@ int main() {
 
     Arv *history = NULL;
 
-    inserir(&history, "Checkpoint 1", 10);
-    inserir(&history, "Checkpoint 1.1", 6);
-    inserir(&history, "Checkpoint 1.2", 15);
-    inserir(&history, "Checkpoint 1.1.1", 4);
-    inserir(&history, "Checkpoint 1.1.2", 8);
+    inserir(&history, "Voce chega no palacio real, que encontra-se em um clima funebre...\n O sequestro da doce princesa Melinda parece abalar a todos em sua volta!\n Enquanto voce caminha pelos largos corredores do castelo, a pressao aumenta sobre seus ombros.\n\n O reino inteiro conta com voce!\n\n Finalmente, voce chega ao trono do Rei Tristan.\n Devastado, com lagrimas nos seus olhos, ele fala com voce:\n \"Ah! Cacador... Que bom que voce recebeu o meu convite.\n Devo confessar que os tempos sao dificeis... Mas, gracas aos Deuses, voce esta aqui para nos ajudar.\n Minha amada filha esta escondida no castelo de Eldia, abandonado a seculos!\n Suspeito que os malditos feiticeiros de Nocturia estao protegendo a torre com o Dragao escuro Relgar.\n Por favor, cacador, me ajude. Voce e minha unica esperanca...\"\n\n Apos uma longa noite de pesquisa sobre como enfrentar o dragao Relgar na biblioteca do reino, voce encontra algo!\n Uma espada mitica \"Luminastra\" e a unica que pode abater o dragao!\n No entanto, a pagina que fala de sua localizacao esta rasgada...\n Estranho... Sera que alguem pode lhe ajudar com esse misterio?\n\n ESCOLHA SUA ACAO! 1 - conversar com a bibliotecaria 2 - conversar com o rei ", 10);
+    inserir(&history, "Voce decide conversar com a bibliotecaria, uma mulher idosa com oculos de leitura e cabelos prateados. Ela olha para voce com olhos sabios e diz:\n\n \"Ah, jovem aventureiro, a espada mitica 'Luminastra' e uma lenda antiga!\n\n Eu adoraria poder ajudar, mas a pagina que fala de sua localizacao esta irremediavelmente rasgada. Nao consigo decifrar o que resta dela.\" Ela suspira com pesar.\n\n \"Entretanto, ha esperanca. No Vale Verde, a leste do reino, vive um sabio elfo chamado Elandor.\n Ele e o guardiao do conhecimento ancestral e pode conhecer o segredo para encontrar a 'Luminastra'. Procure por ele e talvez voce descubra o caminho para a espada que pode abater o Dragao Relgar.\"\n Ela lhe entrega um antigo mapa que mostra a localizacao do Vale Verde.\n\n Seguindo suas cordenadas, você chega em uma vila.\n\nMoradores lhe encaram, deixando claro que sua reputacao claramente nao e muito boa. Um cacador de recompensas sujo... Que segue qualquer ordem por dinheiro.\nSera que isso e verdade?\nVoce chega na casa de Elandor, uma gigantesca arvore, e bate na porta. Mas ninguem lhe atende...\n\n Agora, voce se depara com uma escolha: Arrombar a porta(1) ou Bater maid forte (2)", 6);//
+    inserir(&history, "Voce decide voltar para a sala de trono do Rei Tristan, Ele olha para voce com olhos cheios de preocupacao e diz:\n\n \"Luminastra? Essa espada esta proibida! Ela corrompe todos que a procuram! Em nenhuma hipotese irei-\"\n O rei olha para uma pintura de sua amada filha, lembrando a ele de seu amor perdido... Nao existe nada que ele nao fara para tela de volta.\n Apos uma pausa, o Rei Tristan recompose e continua:\n \"Existe alguem que pode lhe ajudar... Sir Cedric, um aposentado cavaleiro de Aldoria, tempos atras cacava esse artefato maldito...\n Ele costumava ser o mais leal senhor da cidade. Hoje, ele e nosso mais leal bebado... Quando nao esta afogando suas magoas em uma taverna, ele geralmente toca musica pela praca da cidade.\"\n O Rei Tristan lhe entrega um mapa da cidade com a marcacao dos locais mencionados.\n\n Agora, voce se depara com uma escolha: partir para a taverna 'O Barril Dourado'(1) ou dirigir-se a praca da cidade para encontrar Sir Cedric.(2)", 15);
+    inserir(&history, "Voce decide arrombar a porta da casa do ancião, determinado a encontrar respostas sobre a 'Luminastra'. Ao entrar, depara-se com uma cena aterrorizante. No centro da sala, está o corpo inerte do ancião elfo Elandor. Seus olhos estão vidrados, e sangue mancha o chao. E evidente que ele foi atacado. A sensacao de mal e trevas enche o ar.\n\nAntes que voce possa processar a visao, duas figuras sinistras emergem das sombras. Sao cavaleiros de Nocturia, vestindo capas negras e segurando espadas ameacadoras. Suas peles sao palidas e seus olhos sao completamente negros. Com um sorriso sadico, um deles diz: \"CACADOR! BEM QUE SENTIMOS UMA PRESENCA MAIS SUJA QUE A NOSSA...\" \n\nOs olhos dos cavaleiros brilham com malicia, e ambos puxam suas espadas, apontando-as para sua direcao.\n\n\"ESTRANHO... SENTIMOS CONFLITO EM VOCE... COMO SE AINDA HOUVESSE LUZ...\" \n\nVoce desembainha sua lamina, preparado para uma batalha!\n\n\"...DEIXE-NOS DEVORA-LA!\"\n", 4);
+    inserir(&history, "Voce decide bater com mais forca na porta da casa do anciao, determinado a entrar. Logo, voce ouve vozes abafadas vindo do interior:\n \"QUEM ESTA FORA?\" \nVoce decide responder corajosamente:\n \"Sou um cacador de recompensas, enviado pelo Rei Tristan!\"\n A porta se abre rapidamente.\n\nAntes que voce possa reagir, laminas que brilham com energia negra atravessam a porta, perfurando seu estomago. A dor e insuportavel, e voce cai ao chao, ferido gravemente. A vida escapa de voce rapidamente.\n\nCom visao turva, voce consegue ver os responsaveis: Cavaleiros de Nocturia! Soldados escuros da legiao que raptou a princesa.\n Em um balcao de alquimia no canto da sala, existe sua unica esperanca. La, voce avista uma pocao misteriosa que pode salvar sua vida, mas a um terrivel custo. A pocao o transformara em um orc, uma criatura selvagem e feroz, nascido da escuridao. Voce se ve diante de uma escolha dificil: beber a pocao e viver como um orc ou recusar e enfrentar a morte como humano.\n\nA decisao esta em suas maos, e o tempo e curto. Qual sera a sua escolha?", 8);
     inserir(&history, "Checkpoint 1.2.1", 12);
     inserir(&history, "Checkpoint 1.2.2", 17);
     
     while (1) {
    
-        #ifdef _WIN32 
-            system("cls");
-        #else 
-            system("clear");
-        #endif
+        clear();
  
         printf(" /   /   /   /   /   /   /   /   /   /   /\n");
         printf("/   /   /   /   /   /   /   /   /   /   /   /\n");
@@ -65,7 +65,20 @@ int main() {
                 printf("Você escolheu entrar no jogo.\n");
                 break;
             case 2:
-                printf("Você escolheu jogar.\n");
+                clear();
+                printf("DESESPERO!\n");
+                sleep(1);
+                printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
+                sleep(4);
+                printf(" A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
+                sleep(4);
+                printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
+                sleep(4);
+                printf(" Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e convocado a embarcar em uma jornada epica...\n");
+                sleep(5);
+                clear();
+                sleep(1);
+                
                 game(&history);
                 getch();
                 break;
@@ -105,11 +118,16 @@ void game(Arv **t){
   if(*t != NULL){
     printf("%s\n", (*t)->texto);
     if((*t)->esq != NULL){
-      printf("\nVocê gostaria de ir para esquerda(1) ou direita(2)?");
+      sleep(6);
+      printf("\nINSIRA SUA ESCOLHA: ");
       scanf("%d", &choice);
       if(choice == 1){
+        clear();
+        sleep(1);
         game(&((*t)->esq));
       } else {
+        clear();
+        sleep(1);
         game(&((*t)->dir));
       }
     }
@@ -123,7 +141,13 @@ int gerarNumeroAleatorio(int inicio, int limite) {
     
     return numeroAleatorio;
 }
-
+void clear(){
+    #ifdef _WIN32 
+            system("cls");
+        #else 
+            system("clear");
+        #endif
+}
 int combat (int seuHp, Oponente oponente){
     int numeroAleatorio;
     int danoTomado,hpRecuperado;
