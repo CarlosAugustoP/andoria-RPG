@@ -24,7 +24,7 @@ typedef struct arv {
 
 int combat (int seuHp, Oponente oponente);
 int gerarNumeroAleatorio(int inicio, int limite);
-void inserir(Arv **t, char texto [1000], int id);
+void inserir(Arv **t, char texto [2000], int id);
 void game();
 void clear();
 int choice; // variavel global que sera usada na recursao de game()
@@ -65,6 +65,9 @@ int main() {
                 printf("Você escolheu entrar no jogo.\n");
                 break;
             case 2:
+                clear();
+                printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
+                sleep(2);
                 clear();
                 printf("DESESPERO!\n");
                 sleep(1);
