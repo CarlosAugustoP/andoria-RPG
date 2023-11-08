@@ -43,8 +43,8 @@ int main() {
     inserir(&history, "Apos um triunfo epico contra os cavaleiro de Nocturia, O ultimo cavaleiro desmaia no chao, lancando um suspiro final de dor!\n. Suas habilidades superam a ameaca das trevas, e voce emerge vitorioso!\n Os cavaleiros agora estao indefesos diante de voce. \nCom a vantagem a seu favor, voce decide amarrar os cavaleiros para impedi-los de causar mais estragos.\n As cordas apertam seus pulsos, garantindo que nao possam escapar de sua justica. \n\nAgora, com os cavaleiros de Nocturia amarrados e impotentes, voce enfrenta uma decisao crucial\n Apesar da morte do anciao Elandor, podemos ainda extrair as informacoes necessarias...\n Para isso, como voce deseja interroga-los a respeito da espada de Luminastra? Voce tentar persuade-los a falar cooperativamente(1). Ou usar a violencia para extrair suas informacoes(2)", 75);
     inserir(&history, "Decidido a obter informacoes sobre a espada Luminastra e os planos macabros dos cavaleiros, voce tenta persuadir os cavaleiros de Nocturia, mas sua paciencia esta se esgotando. Com raiva, voce exige: 'Onde esta Luminastra? O que a Ordem de Nocturia fez com a princesa?'\nOs cavaleiros olham para voce, encarando a intensidade em sua voz.\nEles se contorcem, tentando se libertar, mas suas amarras os mantem firmemente presos. Voce mantem sua postura, deixando claro que nao aceitara evasivas.\n 'Ja ouvi lendas sobre os cavaleiros de Nocturia. Voces ja foram leais ao rei... Olhem so no que se transformaram', voce continua. 'Diga-me onde ela esta, e talvez haja misericordia para voces.'\nOs cavaleiros riem diante de suas palavras, mas um deles finalmente fala: \"NAO SOMOS MAIS AS PESSOAS QUE ERAMOS. NAO TEMOS MAIS ALMA, CACADOR... CEDEMOS NOSSO ESPIRITO PARA UM PROPOSITO MAIOR QUE NOS. E VOCE? QUAL CAUSA VOCE SERVE? APENAS DINHEIRO.\nVoce rebate: \"Voce nao me conhece. Estou aqui para resgatar a princesa. Nada mais.\n\"VOCE ESTA AQUI PARA SUGAR OS COFRES DO REI TRISTAN! PARE DE MENTIR, CACADOR... VOCE TAMBEM CEDEU SUA ALMA...\", diz um dos cavaleiros.\nVoce sente a verdade nas palavras deles, o que o faz refletir. No entanto, voce resiste a tentacao de se juntar as trevas.\n\"VOCE NAO ENTENDE O PODER DA TREVA. EXISTEM COISAS, CACADOR... COISAS QUE SOMENTE A ESCURIDAO PODE LHE OFERECER. JUNTE-SE A NOS, E TOMAREMOS O REINO INTEIRO PARA NOSSO MESTRE! UMA VIDA SEM PROPOSITO E LAMENTAVEL, CACADOR. ESTA NA HORA DE TE DARMOS UM...\"\nNesse momento, um dos cavaleiros toca em seu braco, e uma onda de escuridao percorre seu ser.\nVoce tem uma visao sombria, compreendendo a tentacao e o poder da treva:\nUm escopo inimaginavel de poder, proporcionado por algo muito mais forte que dinheiro: O medo.\nUma voz sussurra em sua mente, tentando seduzi-lo com promessas de poder inimaginavel.\nEsta na hora de decidir: Se juntar a Ordem das Trevas(1) ou fingir se juntar a Ordem das Trevas para persuade-los.(2)\n", 60);
     inserir(&history, "Voce decide que a violencia e o unico caminho para obter as informacoes que precisa. Com uma ferocidade fria, voce se prepara para usar a forca contra os cavaleiros, determinado a faze-los falar. Suas maos firmes empunham sua arma, prontas para o confronto. Enquanto isso, seu olhar perspicaz percebe algo no balcao de alquimia do elfo Anciao Elandor. La, voce ve um facao brilhante(1) e uma pocao de aparencia acida(2). O facao reluz com promessas de combate, enquanto a pocao misteriosa pode ter usos desconhecidos.", 90);
-    inserir(&history, "A tentação das trevas ganha força, e você aceita seu destino sombrio. A energia escura de Nocturina agora flui por suas veias, moldando sua essência e corrompendo seu coração. A luz que outrora brilhava em seu ser se desvanece, e não há mais escape dessa decisão irrevogável.\n Os cavaleiros, testemunhas de sua transformação, riem com um misto de prazer e satisfação. Eles reconhecem que você aceitou seu destino como senhor das trevas, e se preparam para iniciar a cerimônia de investidura, uma aura maligna pairando sobre todos.\nUm dos cavaleiros se levanta e aponta sua espada, que irradia uma energia obscura e sinistra. Ela brilha com uma intensidade sombria, revelando o poder sombrio que agora flui através de você. Você está prestes a ser consagrado como um senhor das trevas, e o mundo nunca mais será o mesmo.\nApós a investidura, você segue um caminho sinuoso em direção à Floresta de Nocturia, acompanhado pelos dois cavaleiros que o escoltaram até ali. As árvores parecem se contorcer com uma vida sombria e sinistra, e sombras dançam entre seus galhos retorcidos.\nNo coração da floresta, encontram um local antigo e sombrio, um santuário de trevas onde reside Morgator, o Lorde Supremo das Trevas. Ele é um mago de grande poder e autoridade, de unhas longas e uma barba prateada. Seu olhar penetrante parece vasculhar a sua alma. Morgator cumprimenta o recém-investido senhor das trevas com um sorriso malévolo;\n\"Você fez a escolha certa, jovem senhor das trevas\", diz Morgator, sua voz ecoando com uma força sobrenatural. Você se ajoelha perante Morgator, aceitando a escuridão que agora o envolve. Está prestes a embarcar em uma jornada sombria, onde o conhecimento proibido e o poder sinistro o aguardam. \"Agora em diante, seu nome serevante-se, meu novo aprendiz...Sinto um futuro promissor em seu treinamento\"Seu destino como um senhor das trevas está selado, e o mundo nunca mais será o mesmo, pois você se torna um discípulo de Morgator, o Lorde Supremo das Trevas. ", 55);//ainda n acabou
-    inserir(&history, "Checkpoint2 ", 65);
+    inserir(&history, "A tentação das trevas ganha força, e você aceita seu destino sombrio.\n\n A energia escura nocturina agora flui por suas veias, moldando sua essência e corrompendo seu coração.\n A luz que outrora brilhava em seu ser se desvanece, e não há mais escape dessa decisão irrevogável.\n\n Os cavaleiros, testemunhas de sua transformação, riem com um misto de prazer e satisfação.\n Eles reconhecem que você aceitou seu destino como senhor das trevas, e se preparam para iniciar a cerimônia de investidura, uma aura maligna pairando sobre todos.\n\nUm dos cavaleiros se levanta e aponta sua espada, que irradia uma energia obscura e sinistra.\n Ela brilha com uma intensidade sombria, revelando o poder negro que agora flui através de você.\n\nVocê está prestes a ser consagrado como um senhor das trevas, e o mundo nunca mais será o mesmo.\n\nApós a investidura, você segue um caminho sinuoso em direção à Floresta de Nocturia, acompanhado pelos dois cavaleiros que o escoltaram até ali.\n As árvores parecem se contorcer com uma vida sombria e sinistra, e sombras dançam entre seus galhos retorcidos.\nNo coração da floresta, encontram um local antigo e sombrio, um santuário de trevas onde reside Morgator, o Lorde Supremo das Trevas.\n Ele é um mago de grande poder e autoridade, de unhas longas e barba prateada.\n Seu olhar penetrante parece vasculhar a sua alma. Morgator cumprimenta o recém-investido senhor das trevas com um sorriso malévolo;\n\"Você fez a escolha certa, jovem senhor das trevas...\", diz Morgator, sua voz ecoando com uma força sobrenatural.\n\n Você se ajoelha perante Morgator, aceitando a escuridão que agora o envolve. Está prestes a embarcar em uma jornada sombria, onde o conhecimento proibido e o poder sinistro o aguardam.\n\n \"Agora em diante, seu nome sera Lord Nihil, o devorador de esperanca...\n Levante-se, meu novo aprendiz...Sinto um futuro promissor em seu treinamento!\"\n\nSeu destino está selado, e o mundo nunca mais será o mesmo, pois você se torna um discípulo de Morgator, o Lorde Supremo das Trevas.\n\n Voce servira para sempre sobre seu comando, e prepara-se para sua primeira missao: destruir o anjo Raziel, protetor da espada de Luminastra.\n\n Voce aceita sua escura missao? sim(1) ou nao(2)\n\n", 55);//ainda n acabou
+    inserir(&history, "Após fingir ter se juntado à Ordem das Trevas, você agora está em uma posição privilegiada para obter informações. Com cautela, você começa a fazer perguntas aos membros da Ordem, tentando descobrir mais sobre seus planos sinistros.\n\nVocê pergunta: ''Por que a Ordem de Nocturia raptou a princesa Melinda?''\n\nUm dos membros da Ordem, com uma expressão de confiança, responde: ''A princesa Melinda é a chave para o nosso poder. Seu sangue real e a Espada Luminastra corrompida nos darão o poder supremo para conquistar o reino e moldá-lo de acordo com a vontade das trevas. Ela é a peça central de nosso plano.'' Você toma nota mental dessa informação crucial.\n\nEm seguida, você pergunta: ''Onde está a Espada Luminastra?''\n\nO outro cavaleiro, olhando desconfiado, responde: ''A Espada Luminastra está guardada no monte Lumina, sob a proteção do anjo Raziel... O sacrifício real da princesa Melinda a tornará ainda mais poderosa, e então a usaremos para concretizar nossa conquista do reino de Andoria. É o instrumento de nossa ascensão ao poder supremo.\n Você guarda essa informação com cuidado, ciente de sua importância para o destino de Andoria.\n\nAgora, com as informações necessárias em suas mãos, você está pronto para tomar medidas decisivas. O destino do reino depende de suas próximas ações. Você se levanta abruptamente, deixando os dois cavaleiros de Nocturia confusos e perplexos. Eles trocam olhares, visivelmente surpresos com a sua súbita mudança de comportamento. \"EI... VOCE VAI PRA ONDE?\", pergunta um deles, com uma pitada de preocupação na voz. Ao sair da casa, voce nao fala sequer uma palavra.\n \"ERM... VOCE NAO VAI NOS DESAMARRAR NAO?\"\n", 65);
     
     inserir(&history, "Checkpoint 3", 95);
     inserir(&history, "Checkpoint 4", 85);
@@ -55,11 +55,11 @@ int main() {
     inserir(&history, "Checkpoint 32", 98);
     inserir(&history, "Checkpoint 32", 92);
 
-    inserir(&history, "Checkpoint11 ", 52);//final da ordem de nocturia. derrote o anjo raziel.
-    inserir(&history, "Checkpoint12 ", 58);
+    inserir(&history, "O mago Morgator sorri maliciosamente, satisfeito com a sua prontidao.\n\n \"Muito bem, Lord Nihil. Agora, vou lhe contar mais detalhes sobre a missao que o aguarda.\"\nEle conduz voce ate uma camara oculta, onde mapas antigos e grimorios empoeirados adornam as prateleiras.\n Morgator desenrola um pergaminho, revelando uma representacao detalhada do reino de Andoria, com marcadores indicando os locais chave.\nEle aponta para a regiao protegida pelo anjo Raziel, o monte Lumina, onde a Espada Luminastra repousa em um altar sagrado.\n \"Aqui e onde reside a ultima esperanca da luz, guardada por Raziel, seu fiel protetor,\" diz Morgator, sua voz carregada de uma mistura sinistra de antecipacao e ganancia.\n\n\n Com um tom sombrio, Morgator revela a verdade oculta: a princesa Melinda, herdeira do trono de Andoria, foi capturada pelos seguidores da escuridao com o proposito perverso de ser sacrificada com a Espada Luminastra.\n Este ato corrompera a lendaria arma, concedendo-lhe um poder inimaginavel e mergulhando Andoria em um reinado de trevas.\n\n\"O sacrificio real da princesa e crucial para o meu plano,\" diz Morgator, seus olhos brilhando com uma ambicao insaciavel.\n \"Uma vez que Luminastra seja corrompida, me tornarei um novo Deus em Andoria!\n\" A revelacao desse plano nefasto ecoa em sua mente, mas a ideia de uma Andoria mergulhada na escuridao nao lhe traz remorso, na verdade, ela lhe traz certo conforto.\n Afinal, voce nunca gostou muito do reino...\n\nA perspectiva de um reino moldado pelas trevas parece mais apropriada ao seu verdadeiro eu.\n O destino esta selado, e agora voce parte em direcao ao seu proximo desafio: a destruicao do anjo Raziel.\n\n Com a determinacao de um discipulo sedento de poder, voce aceita a missao com um firme \"sim\".\n Cada passo que da na direcao do altar de Luminastra e um passo em direcao ao seu papel como o devorador de esperanca. Um homem disposto a moldar Andoria de acordo com a vontade sombria de Morgator, o Lorde Supremo das Trevas.\n A jornada esta chegando ao fim, e o destino de Andoria esta nas maos do novo senhor das trevas.\n\nPREPARE-SE, LORDE NIHIL, PARA A BATALHA FINAL!\n\n",55);
+    inserir(&history, "Voce se ajoelha diante de Morgator, pronto para aceitar seu destino como senhor das trevas.\n\n No entanto, a medida que voce se inclina, uma sensacao de duvida comeca a se infiltrar em sua mente.\n As palavras e acoes dos cavaleiros, o olhar sinistro de Morgator, tudo isso o faz hesitar.\n\nMas antes que voce possa completar o gesto, uma voz interior grita para voce resistir, para nao se entregar completamente a escuridao.\n\n Num movimento repentino, voce recua e olha nos olhos de Morgator com determinacao.\n\n Morgator, com um sorriso maligno nos labios, estende a mao e agarra seu pescoco com uma forca sobrenatural.\n\n Sua voz ecoa sombriamente enquanto ele diz: \"Voce pagara o preco pela sua falta de ambicao...\"\n\n Com um aperto implacavel, Morgator comeca a sufoca-lo, seus olhos brilhando com crueldade.\n Sua visao comeca a escurecer, e voce luta desesperadamente para respirar.\n A sensacao de traicao toma conta de voce, mas sua decisao de resistir permanece inabalavel.\n No entanto, seus esforcos sao em vao, e a escuridao finalmente o envolve... FIM DE JOGO.", 58);
 
-    inserir(&history, "Checkpoint11 ", 68);
-    inserir(&history, "Checkpoint12 ", 62);
+    inserir(&history, "Checkpoint21 ", 68);
+    inserir(&history, "Checkpoint22 ", 62);
     
     
     /*
@@ -104,11 +104,11 @@ int main() {
                 sleep(1);
                 printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
                 sleep(4);
-                printf(" A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
+                printf("A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
                 sleep(4);
                 printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
                 sleep(4);
-                printf(" Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e convocado a embarcar em uma jornada epica...\n");
+                printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e convocado a embarcar em uma jornada epica...\n");
                 sleep(5);
                 clear();
                 sleep(1);
@@ -187,34 +187,39 @@ int combat (int seuHp, Oponente oponente){
     int danoTomado,hpRecuperado;
     int defesa;
     int acao; 
-    
     char vetorDialogo[9][100] = {
-            "%s rosnando, pronto para o próximo ataque, te encara com intensidade.",
-            "Com um olhar feroz, %s se prepara para lançar seu próximo ataque.",
-            "%s mantém seu olhar fixo em você, antecipando o próximo confronto.",
-            "Você vê %s respirando profundamente, se preparando para o próximo golpe.",
-            "Os olhos de %s brilham com determinação enquanto ele se prepara para atacar novamente.",
-            "Com um grunhido ameaçador, %s se prepara para mais um round de combate.",
-            "%s mantém sua postura, observando cada um de seus movimentos atentamente.",
-            "Você sente a tensão no ar enquanto %s se prepara para o próximo ataque.",
-            "%s parece imperturbável, pronto para desferir outro golpe mortal."
+            "%s rosnando, pronto para o próximo ataque, te encara com intensidade.\n\n",
+            "Com um olhar feroz, %s se prepara para lançar seu próximo ataque.\n\n",
+            "%s mantém seu olhar fixo em você, antecipando o próximo confronto.\n\n",
+            "Você vê %s respirando profundamente, se preparando para o próximo golpe.\n\n",
+            "Os olhos de %s brilham com determinação enquanto ele se prepara para atacar novamente.\n\n",
+            "Com um grunhido ameaçador, %s se prepara para mais um round de combate.\n\n",
+            "%s mantém sua postura, observando cada um de seus movimentos atentamente.\n\n",
+            "Você sente a tensão no ar enquanto %s se prepara para o próximo ataque.\n\n",
+            "%s parece imperturbável, pronto para desferir outro golpe mortal.\n\n"
     };
     while (seuHp>0){
-            char dialogoPersonalizado[80];
+            if (oponente.hp<=0){
+              return 1;
+            }      
+            printf("Seu HP:%d\n",seuHp);
+            printf("Hp inimigo: %d\n\n",oponente.hp);      
+            char dialogoPersonalizado[300];
             numeroAleatorio = gerarNumeroAleatorio(0,8);
             sprintf(dialogoPersonalizado, vetorDialogo[numeroAleatorio],oponente.nome);
+            printf("%s",dialogoPersonalizado);
             time_t tempoInicial = time(NULL); 
-        
-            printf("Rapidamente! Qual a sua ação? 1: ataque 2: defesa\n ");
+            sleep(4);
+            printf("Rapidamente! Qual a sua ação? 1: ataque 2: defesa\n\n ");
             if (scanf("%d",&acao)!=1){
                 danoTomado = gerarNumeroAleatorio(1,10);
                 printf("Você não inseriu um comando a tempo!\n Você perdeu %d de vida!\n" , danoTomado);
                 seuHp = seuHp - danoTomado;
-            
             }else{
+                    clear();                    
                     time_t tempoFinal = time(NULL);
                     double tempoDecorrido = difftime(tempoFinal, tempoInicial);
-                    if (tempoDecorrido <= 5.0) {
+                    if (tempoDecorrido <= 11.0) {
                     switch (acao){
                     case 1:
                             danoTomado = gerarNumeroAleatorio(1,10);
@@ -224,7 +229,7 @@ int combat (int seuHp, Oponente oponente){
                     case 2:
                             defesa = gerarNumeroAleatorio(-1,1);
                             danoTomado = gerarNumeroAleatorio(3,5);
-                            hpRecuperado = gerarNumeroAleatorio (1,4);
+                            hpRecuperado = gerarNumeroAleatorio (1,10);
                             if (defesa){
                                 printf("Você defendeu com sucesso e recuperou %d de hp\n",hpRecuperado);
                                 seuHp = seuHp+hpRecuperado;
@@ -235,19 +240,23 @@ int combat (int seuHp, Oponente oponente){
                 }if (!defesa){
                     danoTomado = gerarNumeroAleatorio(3,8);
                     printf("Agora é a vez do inimigo!\n Você perdeu %d de hp!",danoTomado );
-                    seuHp = seuHp- danoTomado;//acho que isso está na ordem errada
-                  
+                    seuHp = seuHp- danoTomado;
+
             } else {
-                 danoTomado = gerarNumeroAleatorio(3,8);
-                 printf("Tempo esgotado! O oponente ataca.\n");
+                 danoTomado = gerarNumeroAleatorio(3,6);
+                 printf("Vez do inimigo! o oponente ataca! voce perde %d de hp \n", danoTomado);
                  seuHp = seuHp - danoTomado;
             }
-        }       
+        }else{
+              danoTomado = gerarNumeroAleatorio(3,8);
+              printf("Você não atacou a tempo! O oponente desfere um golpe mortal!\n");
+              seuHp = seuHp - danoTomado;
+        } 
     }
     }
     if (seuHp<0){
         return 0;
-    }else{
+    }if (oponente.hp<=0){
         return 1;
     }
 }
