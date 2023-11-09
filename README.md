@@ -1,2 +1,2 @@
 # atividade-aeds
-Salve o reino de Andoria com essa aventura interativa! 
+Salve o reino de Andoria (Ou destrua-o) com essa aventura interativa! 
