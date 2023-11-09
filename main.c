@@ -94,7 +94,7 @@ int main() {
                 printf("Você escolheu entrar no jogo.\n");
                 break;
             case 2:
-            /*
+            
                 clear();
                 printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
                 sleep(2);
@@ -108,10 +108,10 @@ int main() {
                 printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
                 sleep(4);
                 printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e convocado a embarcar em uma jornada epica...\n");
-                sleep(5);
+                sleep(10);
                 clear();
                 sleep(1);
-               */
+               
                 game(&history);
                 getch();
                 break;
@@ -151,7 +151,7 @@ void game(Arv **t){
   if(*t != NULL){
     printf("%s\n", (*t)->texto);
     if((*t)->esq != NULL){
-      //sleep(6);
+      sleep(6);
       printf("\nINSIRA SUA ESCOLHA: ");
       scanf("%d", &choice);
       if(choice == 1){
@@ -160,7 +160,7 @@ void game(Arv **t){
         game(&((*t)->esq));
       } else {
         clear();
-        //sleep(1);
+        sleep(1);
         game(&((*t)->dir));
       }
     }
