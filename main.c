@@ -65,8 +65,8 @@ int main() {
 
 
 
-    inserir(&history, "Checkpoint 32", 98,0);
-    inserir(&history, "Checkpoint 32", 92,0);
+    inserir(&history, "Voce espera os cavaleiros acordarem", 98,0);
+    inserir(&history, "Voce e impaciente e se ferra", 92,0);
 
     inserir(&history, "O mago Morgator sorri maliciosamente, satisfeito com a sua prontidao.\n\n \"Muito bem, Lord Nihil. Agora, vou lhe contar mais detalhes sobre a missao que o aguarda.\"\nEle conduz voce ate uma camara oculta, onde mapas antigos e grimorios empoeirados adornam as prateleiras.\n Morgator desenrola um pergaminho, revelando uma representacao detalhada do reino de Andoria, com marcadores indicando os locais chave.\nEle aponta para a regiao protegida pelo anjo Raziel, o monte Lumina, onde a Espada Luminastra repousa em um altar sagrado.\n \"Aqui e onde reside a ultima esperanca da luz, guardada por Raziel, seu fiel protetor,\" diz Morgator, sua voz carregada de uma mistura sinistra de antecipacao e ganancia.\n\n\n Com um tom sombrio, Morgator revela a verdade oculta: a princesa Melinda, herdeira do trono de Andoria, foi capturada pelos seguidores da escuridao com o proposito perverso de ser sacrificada com a Espada Luminastra.\n Este ato corrompera a lendaria arma, concedendo-lhe um poder inimaginavel e mergulhando Andoria em um reinado de trevas.\n\n\"O sacrificio real da princesa e crucial para o meu plano,\" diz Morgator, seus olhos brilhando com uma ambicao insaciavel.\n \"Uma vez que Luminastra seja corrompida, me tornarei um novo Deus em Andoria!\n\" A revelacao desse plano nefasto ecoa em sua mente, mas a ideia de uma Andoria mergulhada na escuridao nao lhe traz remorso, na verdade, ela lhe traz certo conforto.\n Afinal, voce nunca gostou muito do reino...\n\nA perspectiva de um reino moldado pelas trevas parece mais apropriada ao seu verdadeiro eu.\n O destino esta selado, e agora voce parte em direcao ao seu proximo desafio: a destruicao do anjo Raziel.\n\n Com a determinacao de um discipulo sedento de poder, voce aceita a missao com um firme \"sim\".\n Cada passo que da na direcao do altar de Luminastra e um passo em direcao ao seu papel como o devorador de esperanca. Um homem disposto a moldar Andoria de acordo com a vontade sombria de Morgator, o Lorde Supremo das Trevas.\n A jornada esta chegando ao fim, e o destino de Andoria esta nas maos do novo senhor das trevas.\n\nPREPARE-SE, LORDE NIHIL, PARA A BATALHA FINAL!\n\n",58,0);
     inserir(&history, "Voce se ajoelha diante de Morgator, pronto para aceitar seu destino como senhor das trevas.\n\n No entanto, a medida que voce se inclina, uma sensacao de duvida comeca a se infiltrar em sua mente.\n As palavras e acoes dos cavaleiros, o olhar sinistro de Morgator, tudo isso o faz hesitar.\n\nMas antes que voce possa completar o gesto, uma voz interior grita para voce resistir, para nao se entregar completamente a escuridao.\n\n Num movimento repentino, voce recua e olha nos olhos de Morgator com determinacao.\n\n Morgator, com um sorriso maligno nos labios, estende a mao e agarra seu pescoco com uma forca sobrenatural.\n\n Sua voz ecoa sombriamente enquanto ele diz: \"Voce pagara o preco pela sua falta de ambicao...\"\n\n Com um aperto implacavel, Morgator comeca a sufoca-lo, seus olhos brilhando com crueldade.\n Sua visao comeca a escurecer, e voce luta desesperadamente para respirar.\n A sensacao de traicao toma conta de voce, mas sua decisao de resistir permanece inabalavel.\n No entanto, seus esforcos sao em vao, e a escuridao finalmente o envolve... FIM DE JOGO.", 52,0);
@@ -124,7 +124,7 @@ int main() {
                 sleep(10);
                 clear();
                 sleep(1);
-               */
+                */
                 game(&history);
                 getch();
                 break;
@@ -168,6 +168,7 @@ void game(Arv **t){
   if(*t != NULL){
     printf("%s\n", (*t)->texto);
     if ((*t)->combatFlag == 1){
+        printf("\nPREPARE-SE PARA COMBATE\n");
         if(combat(10, elfo)){
             game(&((*t)->dir));
 
@@ -181,7 +182,7 @@ void game(Arv **t){
       scanf("%d", &choice);
       if(choice == 1){
         clear();
-        sleep(1);
+        //sleep(1);
         game(&((*t)->esq));
       } else {
         clear();
@@ -207,6 +208,8 @@ void clear(){
         #endif
 }
 int combat (int seuHp, Oponente oponente){
+    sleep(15);
+    clear();
     int numeroAleatorio;
     int danoTomado,hpRecuperado;
     int defesa;
@@ -279,8 +282,18 @@ int combat (int seuHp, Oponente oponente){
     }
     }
     if (seuHp<0){
+        sleep(3);
+        clear();
+        printf("BATALHA PERDIDA!\n\n");
+        sleep(3);
+        clear();
         return 0;
     }if (oponente.hp<=0){
+        sleep(3);
+        clear();
+        printf("BATALHA GANHA!\n\n");
+        sleep(3);
+        clear();
         return 1;
     }
 }
