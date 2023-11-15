@@ -36,6 +36,7 @@ int main() {
     char jogador[100];
     int idLastNode = -1;
     int c;
+    int codigo;
 
     Arv *history = NULL;
     //raiz
@@ -195,9 +196,9 @@ int main() {
     // decidi fugir
     inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.2\nAo escolher buscar a espada, voce ignora a angustia de deixar Sir Cedric enfrentando os cavaleiros da Ordem sozinho. Ao chegar ao topo do Monte Lumina, uma visao terrivel segue a distancia: Sir Cedric foi capturado pelos cavaleiros!.\nA impotencia da situacao pesa em seu coracao.\nA dor emocional e profunda, mas voce sabe que focar em sua missao e essencial para honrar seu leal companheiro.\nAcima da montanha, revela-se um ser mitico, o Guardiao Raziel, protetor da espada \"Luminastra\". Agora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 330, 0);
     
+
     
     while (1) {
-   
         clear();
  
         printf(" /   /   /   /   /   /   /   /   /   /   /\n");
@@ -215,7 +216,25 @@ int main() {
         scanf("%d", &opcao);
         Oponente oponente;
 
-        switch (opcao) {
+        FILE *file;
+        file = fopen("historico.txt", "r");
+        if (file == NULL) {
+            printf("Erro ao abrir o arquivo.\n");
+            return 1;
+        }
+
+        while (!feof(file)) {
+            char playerName[100];
+            int node;
+
+            if (fscanf(file, "%s - %d\n", playerName, &node) == 2) {
+                idLastNode = node;
+            }
+        }
+
+        fclose(file);
+
+        switch (opcao) { 
             
             case 1:
 
@@ -245,15 +264,22 @@ int main() {
                 getch();
                 break;
             case 2:
-                if(idLastNode == -1) break;
+                clear();
+                if(idLastNode == -1) printf("Nenhum jogo registrado...\n");
                 else busca(history, idLastNode);
                 printf("\nPressione qualquer tecla para continuar...\n");
                 getch();
                 break;
             case 3:
+                clear();
                 printf("Voce escolheu historias passadas.\n");
 
                 printLastPlayers("historico.txt");
+
+                printf("Escolha o codigo ao lado do jogador que voce deseja visualizar sua trajetoria: ");
+                scanf("%d", &codigo);
+
+                busca(history, codigo);
 
                 getch();
 
