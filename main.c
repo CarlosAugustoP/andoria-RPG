@@ -253,8 +253,6 @@ int main() {
                 
                 jogador[strcspn(jogador, "\n")] = '\0';
 
-                while ((c = getchar()) != '\n' && c != EOF);
-
                 idLastNode = game(&history);
 
                 if(karma < 0) printf ("\n\nJOGUE NOVAMENTE!\n"); // aqui eh caso o usuario tenha perdido um combate
@@ -349,15 +347,15 @@ void inserir(Arv **t, char* texto, int id, int combatFlag, int karma) {
 
 int game(Arv **t){
     int lastVisitedNode = -1;
-    Oponente elfo;//sinto que o bug esta relacionada á falta de um break aqui.
+    Oponente elfo;
     elfo.hp = 1;
-    strcpy(elfo.nome,"elfo");
+    strcpy(elfo.nome,"Inimigo");
     if(*t != NULL){
         printf("%s\n", (*t)->texto);
         if((*t)->karma) karma = karma + (*t)->karma;
         if ((*t)->combatFlag == 1){
             printf("\nPREPARE-SE PARA COMBATE\n");
-            if(combat(100, elfo)){
+            if(combat(1, elfo)){
                 lastVisitedNode = game(&((*t)->dir));
             }else{
                 lastVisitedNode = game(&((*t)->esq));
@@ -365,7 +363,12 @@ int game(Arv **t){
         } else if((*t)->esq != NULL || (*t)->dir != NULL){
             //sleep(6);
             printf("\nINSIRA SUA ESCOLHA: ");
-            scanf("%d", &choice);
+
+            do{
+                scanf("%d", &choice);
+                if(choice != 1 && choice != 2) printf("\nCOMANDO INVALIDO! INSIRA SUA ESCOLHA NOVAMENTE: ");
+            } while (choice != 1 && choice != 2);
+    
             if(choice == 1){
                 clear();
                 //sleep(1);
@@ -405,6 +408,7 @@ int combat (int seuHp, Oponente oponente){
     int danoTomado,hpRecuperado;
     int defesa;
     int acao; 
+
     char vetorDialogo[9][100] = {
             "%s rosnando, pronto para o proximo ataque, te encara com intensidade.\n\n",
             "Com um olhar feroz, %s se prepara para lancar seu proximo ataque.\n\n",
@@ -434,32 +438,37 @@ int combat (int seuHp, Oponente oponente){
             time_t tempoInicial = time(NULL); 
             sleep(4);
             printf("Rapidamente! Qual a sua acao? 1: ataque 2: defesa\n\n ");
-            if (scanf("%d",&acao)!=1){
-                danoTomado = gerarNumeroAleatorio(1,10);
-                printf("Voce nao inseriu um comando a tempo!\n Voce perdeu %d de vida!\n" , danoTomado);
-                seuHp = seuHp - danoTomado;
-            }else{
-                    clear();                    
-                    time_t tempoFinal = time(NULL);
-                    double tempoDecorrido = difftime(tempoFinal, tempoInicial);
-                    if (tempoDecorrido <= 11.0) {
-                    switch (acao){
+            
+            do{
+                scanf("%d",&acao);
+                if(acao != 1 && acao != 2) printf("Comando invalido! Digite novamente: ");
+            } while(acao!=1 && acao!=2); 
+
+            clear();                    
+            time_t tempoFinal = time(NULL);
+            double tempoDecorrido = difftime(tempoFinal, tempoInicial);
+            if (tempoDecorrido <= 11.0) {
+                switch (acao){
                     case 1:
-                            danoTomado = gerarNumeroAleatorio(1,10);
-                            printf("Voce atacou o inimigo com sucesso, gerando %d de dano!\n", danoTomado);
-                            oponente.hp = oponente.hp - danoTomado;
-                            break;
+                        danoTomado = gerarNumeroAleatorio(1,10);
+                        printf("Voce atacou o inimigo com sucesso, gerando %d de dano!\n", danoTomado);
+                        oponente.hp = oponente.hp - danoTomado;
+                        break;
                     case 2:
-                            defesa = gerarNumeroAleatorio(-1,1);
-                            danoTomado = gerarNumeroAleatorio(3,5);
-                            hpRecuperado = gerarNumeroAleatorio (1,10);
-                            if (defesa){
-                                printf("Voce defendeu com sucesso e recuperou %d de hp\n",hpRecuperado);
-                                seuHp = seuHp+hpRecuperado;
-                            }else{
-                                printf("Voce falhou na sua defesa, e perdeu %d de hp\n", danoTomado);
-                                seuHp = seuHp - danoTomado;
-                            }                     
+                        defesa = gerarNumeroAleatorio(-1,1);
+                        danoTomado = gerarNumeroAleatorio(3,5);
+                        hpRecuperado = gerarNumeroAleatorio (1,10);
+                        if (defesa){
+                            printf("Voce defendeu com sucesso e recuperou %d de hp\n",hpRecuperado);
+                            seuHp = seuHp+hpRecuperado;
+                        }else{
+                            printf("Voce falhou na sua defesa, e perdeu %d de hp\n", danoTomado);
+                            seuHp = seuHp - danoTomado;
+                        }
+                        break;
+                    default:
+                        printf("Comando invalido!\n");  
+                        break;              
                 }if (!defesa){
                     danoTomado = gerarNumeroAleatorio(3,8);
                     printf("Agora e a vez do inimigo!\n Voce perdeu %d de hp!",danoTomado );
@@ -475,7 +484,6 @@ int combat (int seuHp, Oponente oponente){
               printf("Voce nao atacou a tempo! O oponente desfere um golpe mortal!\n");
               seuHp = seuHp - danoTomado;
         } 
-    }
     }
     if (seuHp<0){
         sleep(3);
