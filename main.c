@@ -22,6 +22,12 @@ typedef struct arv {
   int combatFlag;
 } Arv;
 
+typedef struct players {
+    char nome[100];
+    int idLastNode;
+    struct players *next;
+} Players;
+
 int combat (int seuHp, Oponente oponente);
 int gerarNumeroAleatorio(int inicio, int limite);
 void inserir(Arv **t, char texto [3500], int id, int combatFlag);
@@ -29,7 +35,9 @@ int game();
 void clear();
 int choice; // variavel global que sera usada na recursao de game()
 void busca(Arv *aux, int n);
-void printLastPlayers(const char *filename);
+void printLastPlayers(Players *head);
+void bubblesortByName(Players **head);
+void insertPlayers(Players **head, const char playerName[100], int node);
 
 int main() {
     int opcao;
@@ -37,6 +45,7 @@ int main() {
     int idLastNode = -1;
     int c;
     int codigo;
+    Players *head = NULL;
 
     Arv *history = NULL;
     //raiz
@@ -196,8 +205,6 @@ int main() {
     // decidi fugir
     inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.2\nAo escolher buscar a espada, voce ignora a angustia de deixar Sir Cedric enfrentando os cavaleiros da Ordem sozinho. Ao chegar ao topo do Monte Lumina, uma visao terrivel segue a distancia: Sir Cedric foi capturado pelos cavaleiros!.\nA impotencia da situacao pesa em seu coracao.\nA dor emocional e profunda, mas voce sabe que focar em sua missao e essencial para honrar seu leal companheiro.\nAcima da montanha, revela-se um ser mitico, o Guardiao Raziel, protetor da espada \"Luminastra\". Agora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 330, 0);
     
-
-    
     while (1) {
         clear();
  
@@ -212,8 +219,6 @@ int main() {
         printf("3 - Histórias passadas\n");
         printf("4 - Sair\n");
         
-        printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
         Oponente oponente;
 
         FILE *file;
@@ -223,16 +228,20 @@ int main() {
             return 1;
         }
 
-        while (!feof(file)) {
-            char playerName[100];
-            int node;
+        char playerName[100];
+        int node;
 
-            if (fscanf(file, "%s - %d\n", playerName, &node) == 2) {
-                idLastNode = node;
-            }
+        while (fscanf(file, "%99[^-] - %d\n", playerName, &node) == 2) {
+            insertPlayers(&head, playerName, node);
+            idLastNode = node;
         }
 
         fclose(file);
+
+        bubblesortByName(&head);
+
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
 
         switch (opcao) { 
             
@@ -274,7 +283,7 @@ int main() {
                 clear();
                 printf("Voce escolheu historias passadas.\n");
 
-                printLastPlayers("historico.txt");
+                printLastPlayers(head);
 
                 printf("Escolha o codigo ao lado do jogador que voce deseja visualizar sua trajetoria: ");
                 scanf("%d", &codigo);
@@ -466,17 +475,55 @@ int combat (int seuHp, Oponente oponente){
     }
 }
 
-void printLastPlayers(const char *filename) {
-    FILE *file = fopen(filename, "r");
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
+void printLastPlayers(Players *head) {
+    while (head != NULL) {
+        printf("%s - %d\n", head->nome, head->idLastNode);
+        head = head->next;
+    }
+}
+
+void insertPlayers(Players **head, const char *nome, int idLastNode) {
+    Players *newPlayer = (Players *)malloc(sizeof(Players));
+    if (newPlayer == NULL) {
+        printf("Erro ao alocar memória para novo jogador.\n");
         return;
     }
 
-    char line[200];
-    while (fgets(line, 200, file) != NULL) {
-        printf(line);
-    }
+    strncpy(newPlayer->nome, nome, sizeof(newPlayer->nome) - 1);
+    newPlayer->nome[sizeof(newPlayer->nome) - 1] = '\0'; // Garante que a string seja terminada adequadamente
+    newPlayer->idLastNode = idLastNode;
+    newPlayer->next = NULL;
 
-    fclose(file);
+    if (*head == NULL) {
+        *head = newPlayer;
+    } else {
+        Players *aux = *head;
+        while (aux->next != NULL) {
+            aux = aux->next;
+        }
+        aux->next = newPlayer;
+    }
+}
+
+void bubblesortByName(Players **head) {
+    if (head == NULL || *head == NULL || (*head)->next == NULL) {
+        return; // Lista vazia ou com um único elemento, não precisa ordenar
+    } else {
+        int swapped;
+        Players *temp = NULL;
+        do {
+            swapped = 0;
+            Players *current = *head;
+            while (current->next != NULL) {
+                if (strcmp(current->nome, current->next->nome) > 0) {
+                    char tempNome[100];
+                    strcpy(tempNome, current->nome);
+                    strcpy(current->nome, current->next->nome);
+                    strcpy(current->next->nome, tempNome);
+                    swapped = 1;
+                }
+                current = current->next;
+            }
+        } while (swapped);
+    }
 }
