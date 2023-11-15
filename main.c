@@ -12,9 +12,6 @@ int karma=0;
 typedef struct  {
     char nome[20];
     int hp;
-    
-
-
 }Oponente;
 
 typedef struct arv {
@@ -28,12 +25,17 @@ typedef struct arv {
 int combat (int seuHp, Oponente oponente);
 int gerarNumeroAleatorio(int inicio, int limite);
 void inserir(Arv **t, char texto [3500], int id, int combatFlag);
-void game();
+int game();
 void clear();
 int choice; // variavel global que sera usada na recursao de game()
+void busca(Arv *aux, int n);
+void printLastPlayers(const char *filename);
 
 int main() {
     int opcao;
+    char jogador[100];
+    int idLastNode = -1;
+    int c;
 
     Arv *history = NULL;
     //raiz
@@ -205,42 +207,56 @@ int main() {
         printf("/   /   /   /   /   /   /   /   /   /   /   /\n");
         
         printf("1 - Entrar no jogo\n");
-        printf("2 - Jogar\n");
+        printf("2 - Visualizar ultima trajetoria\n");
         printf("3 - Histórias passadas\n");
         printf("4 - Sair\n");
         
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
         Oponente oponente;
+
         switch (opcao) {
             
             case 1:
-                printf("Voce escolheu entrar no jogo.\n");
+
+                while ((c = getchar()) != '\n' && c != EOF);
+
+                printf("Jogador, informe o seu nome: ");
+                fgets(jogador, sizeof(jogador), stdin);
+                
+                jogador[strcspn(jogador, "\n")] = '\0';
+
+                while ((c = getchar()) != '\n' && c != EOF);
+
+                idLastNode = game(&history);
+
+                FILE *file;
+                file = fopen("historico.txt", "a");
+                if (file == NULL) {
+                    printf("Erro ao abrir o arquivo.\n");
+                    return 1;
+                }
+
+                // Escreve a string jogador no arquivo
+                fprintf(file, "%s - %d\n", jogador, idLastNode);
+
+                fclose(file);
+
+                getch();
                 break;
             case 2:
-                /*
-                clear();
-                printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
-                sleep(2);
-                clear();
-                printf("DESESPERO!\n");
-                sleep(1);
-                printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
-                sleep(4);
-                printf("A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
-                sleep(4);
-                printf("Desesperado, o sabio REI TRISTAN convoca espioes para descobrir quem esta por tras das trevas de NOCTURIA: O Lorde das Trevas MORGATOR\n");
-                sleep(4);
-                printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e convocado pela inquieta real a embarcar em uma jornada epica...\n");
-                sleep(10);
-                clear();
-                sleep(1);
-                */
-                game(&history);
+                if(idLastNode == -1) break;
+                else busca(history, idLastNode);
+                printf("\nPressione qualquer tecla para continuar...\n");
                 getch();
                 break;
             case 3:
                 printf("Voce escolheu historias passadas.\n");
+
+                printLastPlayers("historico.txt");
+
+                getch();
+
                 break;
             case 4:
                 printf("Voce escolheu sair do jogo. Ate logo!\n");
@@ -249,8 +265,19 @@ int main() {
                 printf("Opcao invalida. Por favor, escolha uma opcao valida.\n");
         }
     }
-    
     return 0;
+}
+
+void busca(Arv *aux, int n) {
+    printf("%s\n", aux->texto);
+    if (aux == (Arv *)NULL)
+        return;
+    if (aux->id == n)
+        return;
+    if (n < aux->id)
+        busca(aux->esq, n);
+    else
+        busca(aux->dir, n);
 }
 
 void inserir(Arv **t, char* texto, int id, int combatFlag) {
@@ -272,38 +299,40 @@ void inserir(Arv **t, char* texto, int id, int combatFlag) {
     }
 }
 
-void game(Arv **t){
-  Oponente elfo;//sinto que o bug esta relacionada á falta de um break aqui.
-  elfo.hp = 1;
-  strcpy(elfo.nome,"elfo");
-  if(*t != NULL){
-    printf("%s\n", (*t)->texto);
-    if ((*t)->combatFlag == 1){
-        printf("\nPREPARE-SE PARA COMBATE\n");
-        if(combat(100, elfo)){
-            game(&((*t)->dir));
-        }else{
-            game(&((*t)->esq));
-        }
-    } else if((*t)->esq != NULL || (*t)->dir != NULL){
-      //sleep(6);
-        printf("\nINSIRA SUA ESCOLHA: ");
-        scanf("%d", &choice);
-        if(choice == 1){
-            clear();
-            //sleep(1);
-            game(&((*t)->esq));
+int game(Arv **t){
+    int lastVisitedNode = -1;
+    Oponente elfo;//sinto que o bug esta relacionada á falta de um break aqui.
+    elfo.hp = 1;
+    strcpy(elfo.nome,"elfo");
+    if(*t != NULL){
+        printf("%s\n", (*t)->texto);
+        if ((*t)->combatFlag == 1){
+            printf("\nPREPARE-SE PARA COMBATE\n");
+            if(combat(100, elfo)){
+                lastVisitedNode = game(&((*t)->dir));
+            }else{
+                lastVisitedNode = game(&((*t)->esq));
+            }
+        } else if((*t)->esq != NULL || (*t)->dir != NULL){
+            //sleep(6);
+            printf("\nINSIRA SUA ESCOLHA: ");
+            scanf("%d", &choice);
+            if(choice == 1){
+                clear();
+                //sleep(1);
+                lastVisitedNode = game(&((*t)->esq));
+            } else {
+                clear();
+                //sleep(1);
+                lastVisitedNode = game(&((*t)->dir));
+            }
         } else {
-            clear();
-            //sleep(1);
-            game(&((*t)->dir));
+            printf("\nFIM DO JOGO\n\nPRESSIONE QUALQUER TECLA PARA CONTINUAR");
+            getch();
+            lastVisitedNode = (*t)->id;
         }
-    } else {
-        printf("\nFIM DO JOGO\n\nPRESSIONE QUALQUER TECLA PARA CONTINUAR");
-        getch();
-        return;
+        return lastVisitedNode;
     }
-  }
 }
 
 int gerarNumeroAleatorio(int inicio, int limite) {
@@ -411,22 +440,17 @@ int combat (int seuHp, Oponente oponente){
     }
 }
 
-/** 
- * carlos 
- * pires 
- * ziraldo 
- * 
- * ou isso ou exibimos a estrutura da arvore, que seria mais dificil 
- * exemplo:
- * 
- * Suas últimas vidas:
- * adriano
- * bernardo
- * carlos
- * 
- *(o usuario escolhe carlos)
+void printLastPlayers(const char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
 
- 1 - iniciar jogo
- 2 - sair de jogo
- 3 - ver ultimos jogos
- */
+    char line[200];
+    while (fgets(line, 200, file) != NULL) {
+        printf(line);
+    }
+
+    fclose(file);
+}
