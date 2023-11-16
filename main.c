@@ -301,6 +301,7 @@ int main() {
                         else{
                             printf("YOU LOSE!");
                             break;
+                            
                         }
                     }else{
                         printf("\n\n Voce chega a Floresta de Nocturia!\n Prepare-se para o boss final!", jogador);
