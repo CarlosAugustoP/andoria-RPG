@@ -42,6 +42,7 @@ void printLastPlayers(Players *head);
 void bubblesortByName(Players **head);
 void insertPlayers(Players **head, const char playerName[100], int node);
 int combatfinal(int seuHp, Oponente oponente);
+void libere(Arv* raiz) ;
 
 int main() {
     int opcao;
@@ -276,6 +277,7 @@ int main() {
                             clear();
                             sleep(2);
                             printf("YOU WIN!");
+                            break;
                         }
                         else{
                             printf("YOU LOSE!");
@@ -292,7 +294,7 @@ int main() {
                             clear();
                             sleep(2);
                             printf("YOU WIN!");
-                            
+                            break;
                         }
                         else{
                             printf("YOU LOSE!");
@@ -312,6 +314,7 @@ int main() {
                             clear();
                             sleep(2);
                             printf("YOU WIN!");
+                            break;
                         }
                         else{
                             printf("YOU LOSE!");
@@ -356,6 +359,7 @@ int main() {
                 break;
             case 4:
                 printf("Voce escolheu sair do jogo. Ate logo!\n");
+                libere(history);
                 return 0;
             default:
                 printf("Opcao invalida. Por favor, escolha uma opcao valida.\n");
@@ -778,5 +782,13 @@ int combatfinal(int seuHp, Oponente oponente) {
         return 0;
     }if (oponente.hp<=0){
         return 1;
+    }
+}
+
+void libere(Arv* raiz) {
+    if (raiz != NULL) {
+        libere(raiz->esq);
+        libere(raiz->dir);
+        free(raiz);
     }
 }
