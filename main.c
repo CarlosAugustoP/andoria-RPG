@@ -39,6 +39,7 @@ void busca(Arv *aux, int n);
 void printLastPlayers(Players *head);
 void bubblesortByName(Players **head);
 void insertPlayers(Players **head, const char playerName[100], int node);
+int combatfinal(int seuHp, Oponente oponente);
 
 int main() {
     int opcao;
@@ -79,7 +80,7 @@ int main() {
 
     inserir(&history, "Com paciencia, voce aguarda os cavaleiros das trevas de Nocturia acordarem.\n Durante esse tempo, voce decide explorar novamente o balcao do velho Elandor.\n Dessa vez, seus olhos se fixam em uma pocao da verdade, uma escolha diferente da anterior.\n\n Segurando a pocao com cuidado, voce aguarda o despertar dos cavaleiros.\n\nQuando recobram a consciencia, voce oferece a pocao da verdade. Apos ingeri-la, os cavaleiros comecam a falar. Eles revelam que a espada Luminastra esta no Monte Lumina, protegida pelo Guardiao Raziel.\n Em seguida, confessam que, alem de capturarem a princesa, planejam cumprir uma velha profecia, denominada \"A profecia da triforca\"...\n\nEssa profecia milenar dita que um dia, um mago de grande poder escuro, Morgator, unira seu poder a espada Lumisastra e criara uma conexao com a luz da realeza, atraves de uma princesa, tornando sua magia indestrutivel!\n\nA verdade desvelada diante de voce lanca luz sobre a verdadeira natureza de sua missao.\n\n Finalmente, eles revelam algo que voce nunca esperava:\n\nA localizacao do supremo mago da ordem de Nocturia, a fonte da energia obscura deles: O mesmo Lord Morgator, que reside na floresta sombria de Nocturia.\n\n Agora, voce diante de uma escolha crucial: solicitar reforcos ao rei e atacar a ordem de Nocturia diretamente, atingindo o mago Morgator(1), Ou seguir em sua jornada para resgatar a princesa no castelo de Eldia(2)", 98, 0, 0);
 
-    inserir(&history, "Com a verdade revelada, a decisao pesa em seus ombros como a lamina de uma espada afiada.\n Determinado a impedir os planos nefastos da ordem de Nocturia, voce decide que e hora de chamar os reforcos do rei e marchar com o exercito real em direcao a floresta sombria de Voriar, onde o sinistro Morgator aguarda.\n\nA mensagem e enviada ao rei, convocando a forca militar do reino para a batalha iminente.\n Sob a luz do dia, o exercito real se reune, estandartes tremulando ao vento, cavaleiros equipando suas armaduras reluzentes e soldados ajustando as lancas e arcos. O som estrondoso dos cascos dos cavalos ecoa pela planicie enquanto voce lidera a marcha em direcao a temida Voriar.\n\nAo chegar a entrada da floresta sombria, a escuridao se adensa, e uma presenca maligna paira no ar. As arvores retorcidas sussurram segredos sinistros, antecipando a chegada iminente da batalha. O exercito real se posiciona, preparando-se para enfrentar as trevas que se escondem entre as sombras.\n\nDe repente, cavaleiros das trevas emergem da escuridao, liderados por sinistras figuras encapuzadas. O confronto se inicia com um choque de aco contra aco, enquanto a luz dos cavaleiros reais luta para dissipar a escuridao que os envolve. As magias colidem no campo de batalha, criando um espetaculo de cores e explosoes misticas.\n\nEm meio ao caos, voce avanca corajosamente em direcao ao epicentro da escuridao, onde Morgator aguarda. O supremo mago da ordem de Nocturia surge, um ser envolto em sombras, emanando uma aura de pura malevolencia.\n\n\"EM OUTRA VIDA, PODERIAMOS SER UNIDOS... MAS SE VOCE QUER COMBATE, TERA!\" O escuro senhor, de barba prateada e unhas longas lhe diz.\n PREPARE-SE PARA A BATALHA FINAL!", 97, 0, 0);
+    inserir(&history, "Com a verdade revelada, a decisao pesa em seus ombros como a lamina de uma espada afiada.\n Determinado a impedir os planos nefastos da ordem de Nocturia, voce decide que e hora de chamar os reforcos do rei e marchar com o exercito real em direcao a floresta sombria de Voriar, onde o sinistro Morgator aguarda.\n\nA mensagem e enviada ao rei, convocando a forca militar do reino para a batalha iminente.\n Sob a luz do dia, o exercito real se reune, estandartes tremulando ao vento, cavaleiros equipando suas armaduras reluzentes e soldados ajustando as lancas e arcos. O som estrondoso dos cascos dos cavalos ecoa pela planicie enquanto voce lidera a marcha em direcao a temida Voriar.\n\nAo chegar a entrada da floresta sombria, a escuridao se adensa, e uma presenca maligna paira no ar. As arvores retorcidas sussurram segredos sinistros, antecipando a chegada iminente da batalha. O exercito real se posiciona, preparando-se para enfrentar as trevas que se escondem entre as sombras.\n\nDe repente, cavaleiros das trevas emergem da escuridao, liderados por sinistras figuras encapuzadas. O confronto se inicia com um choque de aco contra aco, enquanto a luz dos cavaleiros reais luta para dissipar a escuridao que os envolve. As magias colidem no campo de batalha, criando um espetaculo de cores e explosoes misticas.\n\nEm meio ao caos, voce avanca corajosamente em direcao ao epicentro da escuridao, onde Morgator aguarda. O supremo mago da ordem de Nocturia surge, um ser envolto em sombras, emanando uma aura de pura malevolencia.\n\n\"EM OUTRA VIDA, PODERIAMOS SER UNIDOS... MAS SE VOCE QUER COMBATE, TERA!\" O escuro senhor, de barba prateada e unhas longas lhe diz.\n PREPARE-SE PARA A BATALHA FINAL!", 97, 0, 3000);
 
     inserir(&history, "Com determinacao, voce continua sua jornada em busca da Espada Luminastra, subindo o monte de Lumina em direcao ao local onde a lendaria espada repousa.\n\nNo topo do monte de Lumina, voce e recebido por uma visao de tirar o folego. Diante de voce esta uma entidade divina, uma manifestacao do proprio divino: O Guardiao Raziel.\n\n Seus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...\n\n", 99, 0, 0);
 
@@ -260,12 +261,58 @@ int main() {
                     if(karma < 1000){
                         printf("\n\nVOCE TOMOU %d DECISOES ERRADAS DURANTE SUA TRAJETORIA, %s! VOCE NAO CONSEGUIU A ESPADA!\n", karma, jogador);
                         // aqui eh caso o usuario tenha tomado decisoes erradas e karma > 2, nao ganha espada
-                    } else {
-                        // aqui eh o final 2, que o cara vira do mal. karma >= 1000
+                    } else if (karma < 3000) {
+                        printf("\n\n Voce chega ao Monte Lumina!\n Prepare-se para o boss final!", jogador);
+                        sleep(5);
+                        clear();
+                        Oponente GuardiaoRaziel;    
+                        GuardiaoRaziel.hp = 999;
+                        strcpy(GuardiaoRaziel.nome, "Guardiao Raziel");        
+                        if(combatfinal(20,GuardiaoRaziel)){
+                            clear();
+                            sleep(2);
+                            printf("YOU WIN!");
+                        }
+                        else{
+                            printf("YOU LOSE!");
+                            break;
+                        }
+                    }else{
+                        printf("\n\n Voce chega a Floresta de Nocturia!\n Prepare-se para o boss final!", jogador);
+                        sleep(5);
+                        clear();
+                        Oponente LordMorgator;    
+                        LordMorgator.hp = 999;
+                        strcpy(LordMorgator.nome, "Lord Morgator");        
+                        if(combatfinal(20,LordMorgator)){
+                            clear();
+                            sleep(2);
+                            printf("YOU WIN!");
+                            
+                        }
+                        else{
+                            printf("YOU LOSE!");
+                            break;
+                        }
                     }
                 } else {
                     // aqui eh o final normal. karma >= 0 e karma < 2. ganha espada
-                    printf("\n\nPARABENS, %s! VOCE TOMOU BOAS DECISOES E CONSEGUIU A ESPADA!\n", jogador);
+                    printf("\n\nPARABENS, %s! VOCE TOMOU BOAS DECISOES E CONSEGUIU A ESPADA!\n\n Voce chega ao Castelo de Eldia!\n Prepare-se para o boss final!", jogador);
+                    sleep(5);
+                    clear();
+                    Oponente DragaoRelgar;    
+                    DragaoRelgar.hp = 999;
+                    strcpy(DragaoRelgar.nome, "Dragao Relgar");        
+                    combatfinal(20,DragaoRelgar);
+                    if(combatfinal(20,DragaoRelgar)){
+                            clear();
+                            sleep(2);
+                            printf("YOU WIN!");
+                        }
+                        else{
+                            printf("YOU LOSE!");
+                            break;
+                        }
                 }
 
                 FILE *file;
@@ -355,7 +402,7 @@ int game(Arv **t){
         if((*t)->karma) karma = karma + (*t)->karma;
         if ((*t)->combatFlag == 1){
             printf("\nPREPARE-SE PARA COMBATE\n");
-            if(combat(1, elfo)){
+            if(combat(10, elfo)){
                 lastVisitedNode = game(&((*t)->dir));
             }else{
                 lastVisitedNode = game(&((*t)->esq));
@@ -547,5 +594,183 @@ void bubblesortByName(Players **head) {
                 current = current->next;
             }
         } while (swapped);
+    }
+}
+
+int combatfinal(int seuHp, Oponente oponente) {
+      int numeroAleatorio;
+      int danoTomado, hpRecuperado;
+      int defesa;
+      int acao;
+      char vetorDialogo[9][200]; 
+      char golpeEspecial[100];
+      char passwordEscolhido[10];
+  
+      if (strcmp(oponente.nome, "Dragao Relgar") == 0) {
+            strcpy(golpeEspecial, "Voce aponta a espada Luminastra para o dragao, e um raio de luz sai dela, deixando ele fraco!\n\n");
+            const char* relgarDialogo[] = {
+                "Relgar solta um rugido poderoso, suas chamas crepitam ao redor dele.\n\n",
+                "A furia ardente de Relgar se manifesta em seu olhar penetrante...\n\n",
+                "Relgar encara voce com intensidade, as chamas refletindo em seus olhos.\n\n",
+                "Voce ve Relgar inspirando profundamente, preparando-se para desferir chamas poderosas.\n\n",
+                "Voce escuta a Princesa Melinda lhe encorajando, lhe enchendo de determinacao!.\n\n",
+                "Com um rugido estrondoso, Relgar se prepara para mais uma investida.\n\n",
+                "Relgar mantem sua postura majestosa, observando cada um de seus movimentos atentamente.\n\n",
+                "Voce sente o calor intenso no ar enquanto Relgar se prepara para o proximo sopro de fogo.\n\n",
+                "Enquanto o dragao lhe encara com intensidade, a princesa lhe encara com esperanca.\n\n"
+            };
+
+            for (int i = 0; i < 9; ++i) {
+            strcpy(vetorDialogo[i], relgarDialogo[i]);
+    }
+} else if (strcmp(oponente.nome, "Guardiao Raziel") == 0) {
+         strcpy(golpeEspecial, "Voce cria um feitico nocturino que ataca o Guardiao, deixando ele fraco!\n\n");
+    const char* razielDialogo[] = {
+        "Raziel, o Guardiao Celestial, te encara com decepcao em seus olhos.\n\n",
+        "Com um olhar celestial feroz, Raziel se prepara para lancar seu proximo ataque.\n\n",
+        "Raziel mantem seu olhar divino fixo em voce, expressando desapontamento pelo caminho que voce escolheu.\n\n",
+        "Voce ve Raziel respirando profundamente, seu semblante celestial demonstrando tristeza pelo seu desvio.\n\n",
+        "Os olhos divinos de Raziel brilham com determinacao, mas tambem com um toque de tristeza, enquanto ele se prepara para atacar novamente.\n\n",
+        "Com um suspiro celestial, Raziel se prepara para mais um round de combate, lamentando a sua queda.\n\n",
+        "Raziel mantem sua postura celestial, observando cada um de seus movimentos com uma expressao de desaprovacao.\n\n",
+        "Voce sente a tensao no ar, misturada com a tristeza divina de Raziel, enquanto ele se prepara para o proximo ataque.\n\n",
+        "Raziel parece imperturbavel, mas seus olhos refletem a decepcao por suas escolhas, pronto para desferir outro golpe, esperando que voce mude de rumo.\n\n"
+    };
+
+    for (int i = 0; i < 9; ++i) {
+        strcpy(vetorDialogo[i], razielDialogo[i]);
+    }
+} else {
+        strcpy(golpeEspecial, "Voce convoca reforcos do exercicito real, que atacam Lord Morgator, deixando-o fraco!\n\n");
+    const char* morgatorDialogo[] = {
+        
+        "Diante de voce esta Lord Morgator, o Mago das Trevas, cujos olhos lancam faiscas de magia negra, pronto para dancar com o destino.\n\n",
+        "Um olhar sombrio domina o rosto de Lord Morgator, enquanto ele acena com as maos, invocando sombras para seu proximo truque.\n\n",
+        "A presenca imponente de Lord Morgator encara voce, sua figura envolta em um manto de misterio, antecipando o confronto iminente.\n\n",
+        "Observando com astucia, voce ve Lord Morgator respirar profundamente, alimentando-se da energia das trevas para lancar seu feitico.\n\n",
+        "Os olhos hipnoticos de Lord Morgator brilham com a promessa de poder enquanto ele se prepara para entrelacar a magia negra em seu proximo ataque.\n\n",
+        "Com um sussurro soturno, Lord Morgator se prepara para mais uma danca entre as sombras, desencadeando sua magia sinistra.\n\n",
+        "A postura majestosa de Lord Morgator projeta uma aura de dominio, enquanto seus olhos observam cada movimento seu, desvendando seus segredos.\n\n",
+        "Voce sente a magia pulsante no ar, carregada com a intencao malevola de Lord Morgator, enquanto ele se prepara para lancar um feitico sombrio.\n\n",
+        "Lord Morgator parece imperturbavel, as sombras ao seu redor dancam em harmonia com sua vontade, prestes a desferir um feitico que ecoara pelas eras.\n\n"
+    };
+
+
+    for (int i = 0; i < 9; ++i) {
+        strcpy(vetorDialogo[i], morgatorDialogo[i]);
+    }
+        
+    }
+    char passwordArray [3][10] = {"ataque","golpe","impacto"};
+    while (seuHp>0){
+            if (oponente.hp<=0){
+              sleep(2);
+              printf("Antes do seu fim, %s invoca 2 suditos com sua ultima faisca de poder!",oponente.nome);
+              Oponente sudito;
+              strcpy(sudito.nome ,"Sudito");
+              sudito.hp = 7;
+              sleep(4);
+              clear();
+              if (combat(10,sudito)){
+                clear();
+                if(combat(10,sudito)){
+                  return 1;
+                }
+                else{
+                  return 0;
+                }
+              }else{
+                return 0;
+              }
+            }      
+            numeroAleatorio = gerarNumeroAleatorio(0, 8);
+            printf("Seu HP:%d\n",seuHp);
+            printf("Hp inimigo: %d\n\n",oponente.hp);      
+            printf("%s",vetorDialogo[numeroAleatorio]);
+            time_t tempoInicial = time(NULL); 
+           
+            
+            sleep(4);
+            
+      int test = gerarNumeroAleatorio(0, 1);
+      if (test == 1) {
+            strcpy(passwordEscolhido,passwordArray[gerarNumeroAleatorio(0,2)]);
+            printf("Voce tem uma chance de acertar um ponto critico!\n\n");
+            sleep(3);
+            
+            printf("Preste atencao! Quando a proxima mensagem aparecer, escreva a palavra %s o mais rapido possivel!\n",passwordEscolhido);
+      
+            sleep(gerarNumeroAleatorio(1, 5));         
+            time_t inicio = time(NULL);
+        
+            printf("AGORA!\n");
+      
+            char buffer[256];
+            scanf("%s",buffer);
+      
+            time_t fim = time(NULL);
+            double tempoDecorrido = difftime(fim, inicio);
+      
+            if (tempoDecorrido < 4.5 && strcmp(buffer,passwordEscolhido)==0) {
+                printf("%s\n", golpeEspecial);
+                oponente.hp = oponente.hp - 333;
+            } else {
+                printf("Voce nao escreveu %s a tempo e perdeu sua chance!\n",passwordEscolhido);
+            }
+              
+            }else{
+
+            printf("Rapidamente! Qual a sua acao? 1: ataque\n 2: defesa (mais poderoso que antes)\n ");
+            if (scanf("%d",&acao)!=1){
+                danoTomado = gerarNumeroAleatorio(1,10);
+                printf("Voce nao inseriu um comando a tempo!\n Voce perdeu %d de vida!\n" , danoTomado);
+                seuHp = seuHp - danoTomado;
+              
+            }else{
+                    
+                    clear();                    
+                    time_t tempoFinal = time(NULL);
+                    double tempoDecorrido = difftime(tempoFinal, tempoInicial);
+                    if (tempoDecorrido <= 11.0) {
+                    switch (acao){
+                    case 1:
+                            danoTomado = gerarNumeroAleatorio(1,10);
+                            printf("Voce atacou o inimigo com sucesso, gerando %d de dano!\n", danoTomado);
+                            oponente.hp = oponente.hp - danoTomado;
+                            break;
+                    case 2:
+                            defesa = gerarNumeroAleatorio(-1,1);
+                            danoTomado = gerarNumeroAleatorio(3,5);
+                            hpRecuperado = gerarNumeroAleatorio (1,13);
+                            if (defesa){
+                                printf("Voce defendeu com sucesso e recuperou %d de hp\n",hpRecuperado);
+                                seuHp = seuHp+hpRecuperado;
+                            }else{
+                                printf("Voce falhou na sua defesa, e perdeu %d de hp\n", danoTomado);
+                                seuHp = seuHp - danoTomado;
+                            }
+                    
+                }if (!defesa){
+                    danoTomado = gerarNumeroAleatorio(3,8);
+                    printf("Agora e a vez do inimigo!\n Voce perdeu %d de hp!",danoTomado );
+                    seuHp = seuHp- danoTomado;
+
+            } else {
+                 danoTomado = gerarNumeroAleatorio(3,6);
+                 printf("Vez do inimigo! o oponente ataca! voce perde %d de hp \n", danoTomado);
+                 seuHp = seuHp - danoTomado;
+            }
+        }else{
+              danoTomado = gerarNumeroAleatorio(3,8);
+              printf("Voce nao atacou a tempo! O oponente desfere um golpe mortal!\n");
+              seuHp = seuHp - danoTomado;
+        } 
+    }
+    }
+    }
+    if (seuHp<0){
+        return 0;
+    }if (oponente.hp<=0){
+        return 1;
     }
 }
