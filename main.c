@@ -260,20 +260,20 @@ int main() {
                 
                 jogador[strcspn(jogador, "\n")] = '\0';
 
-                 clear();
-                    printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
-                    sleep(2);
-                    clear();
-                    printf("DESESPERO!\n");
-                    sleep(1);
-                    printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
-                    sleep(4);
-                    printf("A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
-                    sleep(4);
-                    printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
-                    sleep(4);
-                    printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e dado poder  de cavaleiro pelo rei e convocado a embarcar em uma jornada epica...\n");
-                    sleep(10);
+                clear();
+                printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
+                sleep(2);
+                clear();
+                printf("DESESPERO!\n");
+                sleep(1);
+                printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
+                sleep(4);
+                printf("A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
+                sleep(4);
+                printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
+                sleep(4);
+                printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e dado poder  de cavaleiro pelo rei e convocado a embarcar em uma jornada epica...\n");
+                sleep(10);
                 clear();
                 sleep(1);
                 
@@ -292,16 +292,17 @@ int main() {
                         Oponente GuardiaoRaziel;    
                         GuardiaoRaziel.hp = 999;
                         strcpy(GuardiaoRaziel.nome, "Guardiao Raziel");        
-                        if(combatfinal(20,GuardiaoRaziel)){
+                        if(combatfinal(hpPlayer,GuardiaoRaziel)){
                             clear();
                             sleep(2);
                             printf("YOU WIN!");
+                            sleep(10);
                             break;
                         }
                         else{
                             printf("YOU LOSE!");
-                            break;
-                            
+                            sleep(10);
+                            break; 
                         }
                     }else{
                         printf("\n\n Voce chega a Floresta de Nocturia!\n Prepare-se para o boss final!", jogador);
@@ -310,14 +311,16 @@ int main() {
                         Oponente LordMorgator;    
                         LordMorgator.hp = 999;
                         strcpy(LordMorgator.nome, "Lord Morgator");        
-                        if(combatfinal(20,LordMorgator)){
+                        if(combatfinal(hpPlayer,LordMorgator)){
                             clear();
                             sleep(2);
                             printf("YOU WIN!");
+                            sleep(10);
                             break;
                         }
                         else{
                             printf("YOU LOSE!");
+                            sleep(10);
                             break;
                         }
                     }
@@ -329,15 +332,16 @@ int main() {
                     Oponente DragaoRelgar;    
                     DragaoRelgar.hp = 999;
                     strcpy(DragaoRelgar.nome, "Dragao Relgar");        
-                    combatfinal(20,DragaoRelgar);
-                    if(combatfinal(20,DragaoRelgar)){
+                    if(combatfinal(hpPlayer,DragaoRelgar)){
                             clear();
                             sleep(2);
-                            printf("YOU WIN!");
+                            printf("\nYOU WIN!");
+                            sleep(10);
                             break;
                         }
                         else{
-                            printf("YOU LOSE!");
+                            printf("\nYOU LOSE!");
+                            sleep(10);
                             break;
                         }
                 }
