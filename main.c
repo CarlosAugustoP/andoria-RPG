@@ -87,7 +87,7 @@ int main() {
 
     inserir(&history, "Com determinacao, voce continua sua jornada em busca da Espada Luminastra, subindo o monte de Lumina em direcao ao local onde a lendaria espada repousa.\n\nNo topo do monte de Lumina, voce e recebido por uma visao de tirar o folego. Diante de voce esta uma entidade divina, uma manifestacao do proprio divino: O Guardiao Raziel.\n\n Seus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...\n\n", 99, 0, 0,0);
 
-    inserir(&history, "Voce deixa a casa, impaciente com o sono profundo dos cavaleiros.\n\n Sua unica fonte de respostas desvanece, e as informacoes necessarias para resgatar a princesa Melinda jamais serao encontradas...\n\n!", 92, 0, 0,0);
+    inserir(&history, "Voce deixa a casa, impaciente com o sono profundo dos cavaleiros.\n\n Sua unica fonte de respostas desvanece, e as informacoes necessarias para resgatar a princesa Melinda jamais serao encontradas...\n\n!", 92, 0, -10000,0);
 
     inserir(&history, "O mago Morgator sorri, satisfeito com a sua prontidao.\n\n \"Muito bem, Lord Nihil. Agora, vou lhe contar mais detalhes sobre a missao que o aguarda.\"\nEle conduz voce ate uma camara oculta, onde mapas antigos e grimorios empoeirados adornam as prateleiras.\n Morgator desenrola um pergaminho, revelando uma representacao detalhada do reino de Andoria, com marcadores indicando os locais chave.\nEle aponta para a regiao protegida pelo Guardiao Raziel, o monte Lumina, onde a Espada Luminastra repousa em um altar sagrado.\n \"Aqui e onde reside a poderosa espada da luz, Luminastra, guardada por Raziel, seu fiel protetor,\" diz Morgator, sua voz carregada de uma mistura sinistra de antecipacao e ganancia.\n\n\n Com um tom sombrio, Morgator revela a verdade oculta:\n a princesa Melinda, herdeira do trono de Andoria, foi capturada pelos seguidores da escuridao com o proposito perverso de cumprir uma escura profecia, tendo sua luz da realeza unida com a escuridao de Morgator e a espada Luminastra, criando uma triforca indestrutivel, e deixando seus poderes indestrutiveis.\n\n\"Isso e crucial para o meu plano,\" diz Morgator, seus olhos brilhando com uma ambicao insaciavel.\n \"Uma vez que a triforca seja feita, me tornarei um novo Deus em Andoria!\"\n\n O destino esta selado, e agora voce parte em direcao ao seu proximo desafio: a destruicao do Guardiao Raziel.\n\n Com a determinacao de um discipulo sedento de poder, voce aceita a missao com um firme \"sim\".\n \nCada passo que da na direcao do altar de Luminastra e um passo em direcao ao seu papel como o homem disposto a moldar Andoria de acordo com a vontade de Morgator, o Lorde Supremo das Trevas.\n A jornada esta chegando ao fim, e o destino de Andoria esta nas suas maos.\n\nPREPARE-SE, LORDE NIHIL, PARA A BATALHA FINAL!\n\n", 58, 0, 1,0);
 
@@ -593,7 +593,7 @@ void insertPlayers(Players **head, const char *nome, int idLastNode) {
     }
 
     strncpy(newPlayer->nome, nome, sizeof(newPlayer->nome) - 1);
-    newPlayer->nome[sizeof(newPlayer->nome) - 1] = '\0'; // Garante que a string seja terminada adequadamente
+    newPlayer->nome[sizeof(newPlayer->nome) - 1] = '\0'; //a string eh terminada adequadamente
     newPlayer->idLastNode = idLastNode;
     newPlayer->next = NULL;
 
@@ -610,7 +610,7 @@ void insertPlayers(Players **head, const char *nome, int idLastNode) {
 
 void bubblesortByName(Players **head) {
     if (head == NULL || *head == NULL || (*head)->next == NULL) {
-        return; // Lista vazia ou com um único elemento, não precisa ordenar
+        return; //lista vazia ou com um único elemento, não precisa ordenar
     } else {
         int swapped;
         Players *temp = NULL;
