@@ -34,7 +34,7 @@ typedef struct players {
 
 int combat (int seuHp, Oponente oponente, int waitFlag);
 int gerarNumeroAleatorio(int inicio, int limite);
-void inserir(Arv **t, char texto [3500], int id, int combatFlag, int karma, int hpIncrease);
+void inserir(Arv **t, char *texto, int id, int combatFlag, int karma, int hpIncrease);
 int game();
 void clear();
 void busca(Arv *aux, int n);
@@ -230,8 +230,11 @@ int main() {
         FILE *file;
         file = fopen("historico.txt", "r");
         if (file == NULL) {
-            printf("Erro ao abrir o arquivo.\n");
-            return 1;
+            file = fopen("historico.txt", "w");
+            if(file == NULL){
+                printf("Erro ao abrir o arquivo.\n");
+                return 1;
+            }
         }
 
         char playerName[100];
@@ -289,7 +292,7 @@ int main() {
                         printf("\n\nVOCE TOMOU %d DECISOES ERRADAS DURANTE SUA TRAJETORIA, %s! VOCE NAO CONSEGUIU A ESPADA!\n", karma, jogador);
                         // aqui eh caso o usuario tenha tomado decisoes erradas e karma > 2, nao ganha espada
                     } else if (karma < 3000) {
-                        printf("\n\n Voce chega ao Monte Lumina!\n Prepare-se para o boss final!", jogador);
+                        printf("\n\n Voce chega ao Monte Lumina!\n Prepare-se para o boss final, %s!", jogador);
                         sleep(5);
                         clear();
                         Oponente GuardiaoRaziel;    
@@ -308,7 +311,7 @@ int main() {
                             break; 
                         }
                     }else{
-                        printf("\n\n Voce chega a Floresta de Nocturia!\n Prepare-se para o boss final!", jogador);
+                        printf("\n\n Voce chega a Floresta de Nocturia!\n Prepare-se para o boss final, %s!", jogador);
                         sleep(5);
                         clear();
                         Oponente LordMorgator;    
@@ -351,7 +354,7 @@ int main() {
 \n\
 ");
                     sleep(7);
-                    printf("Voce chega ao castelo de Eldia! Prepare-se para o boss final.!\n");
+                    printf("Voce chega ao castelo de Eldia! Prepare-se para o boss final, %s!\n", jogador);
                     sleep(3);
                     clear();
                     Oponente DragaoRelgar;    
@@ -360,14 +363,14 @@ int main() {
                     if(combatfinal(hpPlayer,DragaoRelgar)){
                             clear();
                             sleep(2);
-                            printf("\nYOU WIN!");
+                            printf("YOU WIN!");
                             sleep(5);
                             break;
                         }
                         else{
                             sleep(2);
                             clear();
-                            printf("\nYOU LOSE!");
+                            printf("YOU LOSE!");
                             sleep(5);
                             break;
                         }
