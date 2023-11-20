@@ -32,7 +32,7 @@ typedef struct players {
     struct players *next;
 } Players;
 
-int combat (int seuHp, Oponente oponente);
+int combat (int seuHp, Oponente oponente, int waitFlag);
 int gerarNumeroAleatorio(int inicio, int limite);
 void inserir(Arv **t, char texto [3500], int id, int combatFlag, int karma, int hpIncrease);
 int game();
@@ -56,7 +56,7 @@ int main() {
     //raiz
     inserir(&history, "Voce chega no palacio real, que encontra-se em um clima funebre...\n O sequestro da doce princesa Melinda parece abalar a todos em sua volta!\n Enquanto voce caminha pelos largos corredores do castelo, a pressao aumenta sobre seus ombros.\n\n O reino inteiro conta com voce!\n\n Finalmente, voce chega ao trono do Rei Tristan.\n Devastado, com lagrimas nos seus olhos, ele fala com voce:\n \"Ah! Cacador... Que bom que voce recebeu o meu convite.\n Devo confessar que os tempos sao dificeis... Mas, gracas aos Deuses, voce esta aqui para nos ajudar.\n Minha amada filha esta escondida no castelo de Eldia, abandonado a seculos!\n Suspeito que os malditos feiticeiros de Nocturia estao protegendo a torre com o Dragao escuro Relgar.\n Por favor, cacador, me ajude. Voce e minha unica esperanca...\"\n\n Apos uma longa noite de pesquisa sobre como enfrentar o dragao Relgar na biblioteca do reino, voce encontra algo!\n Uma espada mitica \"Luminastra\" e a unica que pode abater o dragao!\n No entanto, a pagina que fala de sua localizacao esta rasgada...\n Estranho... Sera que alguem pode lhe ajudar com esse misterio?\n\n ESCOLHA SUA ACAO! 1 - conversar com a bibliotecaria 2 - conversar com o rei ", 200, 0, 0,0);
     //historia carlos 1.1
-    inserir(&history, "Voce decide conversar com a bibliotecaria, uma mulher idosa com oculos de leitura e cabelos prateados. Ela olha para voce com olhos sabios e diz:\n\n \"Ah, jovem aventureiro, a espada mitica 'Luminastra' e uma lenda antiga!\n\n Eu adoraria poder ajudar, mas a pagina que fala de sua localizacao esta irremediavelmente rasgada. Nao consigo decifrar o que resta dela.\" Ela suspira com pesar.\n\n \"Entretanto, ha esperanca. No Vale Verde, a leste do reino, vive um sabio elfo chamado Elandor.\n Ele e o guardiao do conhecimento ancestral e pode conhecer o segredo para encontrar a 'Luminastra'. Procure por ele e talvez voce descubra o caminho para a espada que pode abater o Dragao Relgar.\"\n Ela lhe entrega um antigo mapa que mostra a localizacao do Vale Verde.\n\n Voce chega na casa de Elandor, uma gigantesca arvore, e bate na porta. Mas ninguem lhe atende...\n\n Agora, voce se depara com uma escolha: Derrubar a porta(1) ou Bater mais forte (2)", 100,0, 0,0);
+    inserir(&history, "Voce decide conversar com a bibliotecaria, uma mulher idosa com oculos de leitura e cabelos prateados. Ela olha para voce com olhos sabios e diz:\n\n \"Ah, jovem aventureiro, a espada mitica 'Luminastra' e uma lenda antiga!\n\n Eu adoraria poder ajudar, mas a pagina que fala de sua localizacao esta irremediavelmente rasgada. Nao consigo decifrar o que resta dela.\" Ela suspira com pesar.\n\n \"Entretanto, ha esperanca. No Vale Verde, a leste do reino, vive um sabio elfo chamado Elandor.\n Ele e o guardiao do conhecimento ancestral e pode conhecer o segredo para encontrar a 'Luminastra'. Procure por ele e talvez voce descubra o caminho para a espada que pode abater o Dragao Relgar.\"\n Ela lhe entrega um antigo mapa que mostra a localizacao do Vale Verde.\n\n Voce chega na casa de Elandor, uma gigantesca arvore, e bate na porta. Mas ninguem lhe atende, e voce escuta o barulho de uma espada sendo guardada.\n\n Preocupado, voce se depara com uma escolha: Derrubar a porta, exercendo sua autoridade dada pelo Rei(1) ou Bater mais forte (2)", 100,0, 0,0);
     inserir(&history, "Voce decide derrubar a porta da casa do anciao, determinado a encontrar respostas sobre a 'Luminastra'. Ao entrar, depara-se com uma cena aterrorizante. No centro da sala, esta o desmaiado anciao elfo Elandor. E evidente que ele foi atacado. A sensacao de mal e trevas enche o ar.\n\nAntes que voce possa processar a visao, duas figuras sinistras emergem das sombras. Sao cavaleiros de Nocturia, vestindo capas negras e segurando espadas ameacadoras. Suas peles sao palidas e seus olhos sao completamente negros. Com um sorriso, um deles diz: \"UM CACADOR DE RECOMPENSAS! BEM QUE SENTIMOS O PECADO DA GANANCIA...\" \n\nOs olhos dos cavaleiros brilham com malicia, e ambos puxam suas espadas, apontando-as para sua direcao.\n\n\"ESTRANHO... SENTIMOS CONFLITO EM VOCE... COMO SE HOUVESSE LUZ...\" \n\nVoce desembainha sua lamina, preparado para uma batalha!\n\n\"...VAMOS APAGA-LA!\"\n", 50, 1, 1,0);
     inserir(&history, "Voce decide bater com mais forca na porta da casa do anciao, determinado a entrar. Logo, voce ouve vozes abafadas vindo do interior:\n \"QUEM ESTA FORA?\" \nVoce decide responder corajosamente:\n \"Sou um cacador de recompensas, enviado pelo Rei Tristan!\"\n A porta se abre rapidamente.\n\nAntes que voce possa reagir, laminas que brilham com energia negra atravessam a porta, golpeando voce.\n\n", 150,0, -10000,0);
     inserir(&history, "Em um movimento agil, os cavaleiros empunham suas espadas e com precisao cruel, desferem golpes contundentes.\n\n Voce perde a batalha!.\n\n", 25 , 0, -10000,0);
@@ -65,9 +65,10 @@ int main() {
     
     inserir(&history, "Enquanto explora o ambiente, seu olhar perspicaz se fixa no balcao de alquimia do elfo Anciao Elandor, onde voce avista varios tipos de pocoes de magia da luz e escuridao.\n\nLa, existem duas pocoes misteriosas de cores diferentes roxa(1) e preta(2).\n\n Cada uma emite uma aura magica unica, sugerindo propriedades distintas.\n Uma decisao se desenha diante de voce, e voce precisa escolher entre essas duas pocoes intrigantes.", 90, 0, 1,0);
 
-    inserir(&history, "A tentacao ganha forca, e voce aceita seu destino sombrio.\n\n A energia escura nocturina agora flui por suas veias, moldando sua essencia.\n nao ha mais escape dessa decisao irrevogavel.\n\n Os cavaleiros, testemunhas de sua transformacao, riem com satisfacao.\n Eles reconhecem que voce aceitou seu destino como senhor das trevas, e se preparam para iniciar a cerimonia de investidura.\n\nUm dos cavaleiros se levanta e aponta sua espada, que irradia uma energia obscura e sinistra.\n Ela brilha com uma intensidade sombria, revelando o poder negro que agora flui atraves de voce.\n\nVoce esta prestes a ser consagrado como um senhor das trevas, e o mundo nunca mais sera o mesmo.\n\nApos a investidura, voce segue um caminho sinuoso em direcao a Floresta Escura, acompanhado pelos dois cavaleiros que o escoltaram ate ali.\n As arvores parecem se contorcer com uma vida sombria e sinistra, e sombras dancam entre seus galhos retorcidos.\nNo coracao da floresta, encontram um local antigo e sombrio, um santuario de trevas onde reside Morgator, o Lorde Supremo das Trevas.\n Ele e um mago de grande poder e autoridade, de unhas longas e barba prateada.\n Seu olhar penetrante parece vasculhar a sua alma. Morgator cumprimenta o recem-investido senhor das trevas com um sorriso malevolo:\n\"Voce fez a escolha certa, jovem...\", diz Morgator, sua voz ecoando com uma forca sobrenatural.\n\n Voce se ajoelha perante Morgator, aceitando a escuridao que agora o envolve.\n\n \"Agora em diante, seu nome sera Lord Nihil...\n Levante-se, meu novo aprendiz...Sinto um futuro promissor em seu treinamento!\"\n\n Voce aceita sua escura missao? nao(1) ou sim(2)\n\n", 55, 0, 1000,0);//ainda n acabou
+    inserir(&history, "A tentacao ganha forca, e voce aceita seu destino sombrio.\n\n A energia escura nocturina agora flui por suas veias, moldando sua essencia.\n nao ha mais escape dessa decisao irrevogavel.\n\n Os cavaleiros, testemunhas de sua transformacao, riem com satisfacao.\n Eles reconhecem que voce aceitou seu destino, e se preparam para iniciar a cerimonia de investidura.\n\nApos a investidura, voce segue um caminho sinuoso em direcao a Floresta de Nocturia, acompanhado pelos dois cavaleiros que o escoltaram ate ali.\n As arvores parecem se contorcer com uma vida sombria, e sombras dancam entre seus galhos retorcidos.\nNo coracao da floresta, encontram um local antigo e sombrio, um santuario de trevas onde reside Morgator, o Lorde Supremo das Trevas.\n Ele e um mago de grande poder e autoridade, de unhas longas e barba prateada.\n Seu olhar penetrante parece vasculhar a sua alma. Morgator cumprimenta o recem-investido senhor das trevas com um sorriso malevolo:\n\"Voce fez a escolha certa, jovem...\", diz Morgator, sua voz ecoando com uma forca sobrenatural.\n\n Voce se ajoelha perante Morgator.\n\n \"Agora em diante, seu nome sera Lord Nihil...\n Levante-se, meu novo aprendiz...Sinto um futuro promissor em seu treinamento!\"\n\n Voce aceita sua escura missao? nao(1) ou sim(2)\n\n", 55, 0, 1000,0);//ainda n acabou
 
-    inserir(&history, "Apos fingir ter se juntado a Ordem das Trevas, voce agora esta em uma posicao privilegiada para obter informacoes. Com cautela, voce comeca a fazer perguntas aos membros da Ordem, tentando descobrir mais sobre seus planos sinistros.\n\nVoce pergunta: \"Por que a Ordem de Nocturia raptou a princesa Melinda?\"\n\nUm dos membros da Ordem, com uma expressao de confianca, responde:\n \"Existe uma velha profecia, que se juntarmos a princesa Melinda com nosso mestre, Lord Morgator e a espada Luminastra, teremos poder ilimitado...\" \n\nEm seguida, voce pergunta: ''E essa tal espada Luminastra esta aonde?''\n\nO outro cavaleiro, olhando desconfiado, responde: ''A Espada Luminastra esta guardada no monte Lumina, sob a protecao do Guardiao Raziel... Ela, e a princesa sao o instrumento de nossa ascensao ao poder supremo, criando uma triforca quando unidas a Lord Morgator...''\n\nAgora, com as informacoes necessarias em suas maos, voce esta pronto para tomar medidas decisivas.\nVoce se levanta abruptamente, deixando os dois cavaleiros de Nocturia confusos e perplexos. \n\nEles trocam olhares, visivelmente surpresos com a sua subita mudanca de comportamento.\n\n \"EI... VOCE VAI PRA ONDE?\", pergunta um deles, com uma pitada de preocupacao na voz.\n Ao sair da casa, voce nao fala sequer uma palavra.\n\n \"ERM... VOCE NAO VAI NOS DESAMARRAR NAO?\"\n\n Voce decide nao desamarrar os cavaleiros e, em vez disso, sai da casa, determinado a encontrar a Espada Luminastra. No caminho, a floresta escura e sombria a sua frente parece mais imponente do que nunca. Enquanto avanca, voce de repente se depara com um elfo baixo e magro, que fala de um jeito peculiar. Ele e um vendedor de itens, e uma expressao ganancosa ilumina seus olhos enquanto ele se aproxima de voce.\n\n\"Oi, aventureiro! Procurando por algo especial, hm?\" diz o elfo com um sorriso malicioso.\n\nVoce olha para ele, curioso, e pergunta: \"O que voce tem para vender?\"\n\nO elfo puxa uma pequena pocao de vida de seu bolso e diz: \"Tenho algo que pode te salvar de apuros, amigo. \nUma pocao de vida que pode te curar em momentos dificeis. Voce nunca sabe quando vai precisar de uma, mmm!\"\n\nVoce pergunta quanto custa, e o elfo peculiar da um risinho astuto. \"Ah, meu amigo, essa pocao de vida nao e barata, mmm. Ela custa uma pequena fortuna, mas pode ser a diferenca entre a vitoria e a derrota, mmm.\n Voce tem o ouro necessario, mmm?\"\n\nVoce verifica sua bolsa e percebe que nao possui o dinheiro necessario para comprar a pocao. Voce olha para o elfo, ponderando suas opcoes. Discretamente pegar o pocao do elfo poderia ser tentador, mas isso poderia ter consequencias(1). Por outro lado, voce poderia continuar em sua jornada e resgatar a princesa com sua coragem e seu HP atual(2).\n\nA decisao esta em suas maos. O que voce escolhe fazer, mmm?", 65, 0, 0,0);
+    inserir(&history, "Ao fingir se infiltrar na Ordem das Trevas, voce indaga sobre seus sinistros planos. Descobre que a Ordem rapta a princesa Melinda devido a uma profecia: unir Melinda, Lord Morgator e a espada Luminastra concede poder ilimitado. A espada esta no monte Lumina, protegida pelo Guardiao Raziel. Determinado, deixa os cavaleiros de Nocturia perplexos e decide nao desamarra-los.\nAo sair, depara-se com um elfo vendedor de itens na sinistra floresta. Ele oferece uma cara pocao de vida, vital em momentos dificeis. No entanto, seu ouro e insuficiente. O elfo, com um risinho astuto, diz: \"Ah, meu amigo, essa pocao de vida nao e barata, mmm. Ela custa uma pequena fortuna, mas pode ser a diferenca entre a vitoria e a derrota, mmm. Voce tem o ouro necessario, mmm?\"\nDiante das opcoes, pondera se deve discretamente pegar a pocao (1) ou prosseguir na jornada, confiando em sua coragem e HP atual para resgatar a princesa (2).\nA decisao e sua. O que escolhe fazer, mmm?", 65, 0, 0,0);
+
     
     inserir(&history, "Voce seleciona a pocao de cor preta, segurando-a com cuidado em suas maos enquanto se aproxima dos cavaleiros.\n\n Pela primeira vez desde que os encarou, seus olhos demonstram medo e incerteza. No entanto, sua determinacao e feroz e gelida quando pergunta uma ultima vez: \"Onde esta a espada Luminastra?\" Os cavaleiros lhe encaram com determinacao, recusando-se a ceder diante de sua ameaca.\n\n\"NAO SOMOS COMO VOCE, CACADOR DE RECOMPENSAS... TEMOS HONRA EM NOSSA CAUSA. NUNCA LHE DIREMOS\", declara um dos cavaleiros com um tom de escarnio. No entanto, suas palavras nao abalam sua determinacao.\n\nVoce solta uma risada. Nao e a primeira vez que ouve aquelas mesmas palavras...\n\nOs Nocturinos nao lhe deixaram escolha. Voce avanca com seu plano, comecando pela pocao. Com habilidade, voce faz com que ambos os cavaleiros inalem o suave aroma, e logo eles caem em um sono profundo.\n\nEles roncam de sono, levando voce a perceber que suas respostas terao de esperar...\n\n Que constrangedor... \n\n Voce espera algumas horas...\n\nE mais outras horas...\n\n E eles continuam em sono profundo. (1) sair da casa. (2)esperar mais.", 95, 0, 1,0);
 
@@ -77,7 +78,7 @@ int main() {
 
     inserir(&history, "Voce nao pode simplesmente ignorar a angustia do elfo indefeso!\n\n Mesmo que sua saude esteja fragilizada, sua determinacao e inabalavel.\n\n Com um coracao corajoso, voce se lanca no meio dos bandidos, determinado a proteger o elfo e enfrentar os assaltantes, apesar dos riscos envolvidos.\n\nOs bandidos, surpresos com sua audacia, imediatamente se preparam para o combate.\n\n As laminas deles cintilam a luz do sol. Que a batalha comece!", 82,1, 0,0);
 
-    inserir(&history, "A batalha e feroz, e voce luta com bravura, demonstrando honra em cada movimento.\n No entanto, os numeros dos bandidos sao superiores, e sua saude ja estava enfraquecida devido as acoes anteriores.\n Apesar de seus esforcos heroicos, voce nao consegue prevalecer contra a forca esmagadora dos assaltantes.\n\nFinalmente, voce cai diante dos bandidos.\n\n Sua luta em nome da justica e da honra nao sera esquecido, e sua historia vivera na memoria daqueles que testemunharam sua bravura. Neste momento critico, uma voz celestial ressoa em sua mente. E Raziel, um ser de luz e justica, guardiao da espada Luminastra.\n Sua voz e serena e poderosa, e ele se comunica diretamente com voce:\n\n\"CORAJOSO BUSCADOR DA LUZ, VOCE DEMONSTROU GRANDE HONRA EM SUA LUTA.\n SEU SACRIFICIO NAO PASSOU DESPERCEBIDO.\n SAIBA QUE VOCE ESTA PERTO DO SEU OBJETIVO. O MONTE LUMINA ESTA AO ALCANCE. MANTENHA SUA HONRA, POIS E A QUALIDADE MAIS VALIOSA QUE UM HEROI PODE POSSUIR. JOGUE DE NOVO...\"", 81, 0, -10000,0);
+    inserir(&history, "A batalha e feroz, e voce luta com bravura, demonstrando honra em cada movimento.\n No entanto, os numeros dos bandidos sao superiores, e sua saude ja estava enfraquecida devido as acoes anteriores.\n Apesar de seus esforcos heroicos, voce nao consegue prevalecer contra a forca esmagadora dos assaltantes.\n\nFinalmente, voce cai diante dos bandidos.\n\n Sua luta em nome da justica e da honra nao sera esquecido, e sua historia vivera na memoria daqueles que testemunharam sua bravura. Neste momento critico, uma voz celestial ressoa em sua mente. E Raziel, um ser de luz e justica, guardiao da espada Luminastra.\n Sua voz e serena e poderosa, e ele se comunica diretamente com voce:\n\n\"CORAJOSO BUSCADOR DA LUZ, VOCE DEMONSTROU GRANDE HONRA EM SUA LUTA.\n SEU SACRIFICIO NAO PASSOU DESPERCEBIDO.\n SAIBA QUE VOCE ESTA PERTO DO SEU OBJETIVO. O MONTE LUMINA ESTA AO ALCANCE. MANTENHA SUA HONRA, POIS E A QUALIDADE MAIS VALIOSA QUE UM HEROI PODE POSSUIR. JOGUE DE NOVO, E ESCOLHA CONVENCER OS CAVALEIROS...\"", 81, 0, -10000,0);
 
     inserir(&history, "Apesar de sua condicao enfraquecida, voce supera os bandidos, um por um.\n Seus movimentos sao precisos, e voce demonstra grande coragem e habilidade na luta. Os bandidos, sob a pressao de sua resistencia feroz, sao finalmente derrotados e se dispersam, deixando para tras o elfo que tentaram roubar.\n\nO elfo, profundamente grato, agradece a voce com lagrimas nos olhos e uma maca que restaura seu hp.\nVoce triunfou na batalha, protegendo a inocente e restaurando a paz na vila.\n Sua coragem e honra brilham como um farol, e sua jornada em busca da espada Luminastra continua, fortalecida pela vitoria que voce conquistou com bravura.\n\n Com determinacao, voce continua sua jornada em busca da Espada Luminastra, subindo o monte de Lumina em direcao ao local onde a lendaria espada repousa.\n\nNo topo do monte de Lumina, voce e recebido por uma visao de tirar o folego. Diante de voce esta uma entidade divina, uma manifestacao do proprio divino: O Guardiao Raziel.\n\n Seus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 83, 0, 0,5);
 
@@ -177,12 +178,12 @@ int main() {
     inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2\nAo optar por cacar a Luminarca e ganhar poder, voce se sente fortalecido pela criatura rara, seu corpo pulsando com uma energia renovada.\n\n No entanto, a medida que voce e Sir Cedric se aproximam do Monte Lumina, a aura misteriosa da floresta cede lugar a um ambiente mais sombrio e tenso.\nAo alcancar o Monte Lumina, voce depara-se com uma cena inesperada: um dos lideres do exercito da Ordem de Nocturia esta presente, liderando uma busca pelo mesmo artefato, a espada \"Luminastra\". Sir Cedric, percebendo a ameaca iminente, sugere que voce corra para o monte e busque a espada enquanto ele fica para atrasar o cavaleiro.\nVoce enfrenta uma nova decisao: (1) - ficar e proteger Sir Cedric\n(2) - buscar a espada", 348, 0, 0, 10);
 
     // decidi buscar a espada
-    inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.2\nAo escolher buscar a espada, voce ignora a angustia de deixar Sir Cedric enfrentando os cavaleiros da Ordem sozinho. Ao chegar ao topo do Monte Lumina, uma visao terrivel segue a distancia: Sir Cedric foi capturado pelos cavaleiros!.\nA impotencia da situacao pesa em seu coracao.\nA dor emocional e profunda, mas voce sabe que focar em sua missao e essencial para honrar seu leal companheiro.\nAcima da montanha, revela-se um ser mitico, o Guardiao Raziel, protetor da espada \"Luminastra\". Agora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 349, 0, 1, 0);
+    inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.2\nAo escolher buscar a espada, voce ignora Sir Cedric enfrentando os cavaleiros da Ordem sozinho. Ao chegar ao topo do Monte Lumina, uma visao terrivel segue a distancia: Sir Cedric foi capturado pelos cavaleiros!.\nA impotencia da situacao pesa em seu coracao.\nA dor emocional e profunda, mas voce sabe que focar em sua missao e essencial para honrar seu leal companheiro.\nAcima da montanha, revela-se um ser mitico, o Guardiao Raziel, protetor da espada \"Luminastra\". Agora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 349, 0, 1, 0);
 
     inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.1\nVoce opta por ficar e proteger o Sir Cedric.\nSir Cedric diz para voce com tom de raiva, mas tambem de alivio: PARA UM CACADOR DE RECOMPENSAS VOCE NAO E TAO ESPERO!HAHAH, DEVERIA TER IDO BUSCAR A ESPADA!", 346, 1, 0, 0);
     
     inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.1.1FIM DE JOGO!\n", 345, 0, -10000, 0);
-    inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.1.2\nA batalha continua ardua, cada movimento e uma danca perigosa. O cavaleiro da Ordem de Nocturia mantem sua ferocidade, desferindo ataques mortais.\n O combate atinge um apice quando, de repente, Sir Cedric, mesmo gravemente ferido, surge diante de voce. Com bravura, ele enfrenta o ataque do cavaleiro, retribuindo com golpes determinados.\nEm meio aos clamores da batalha, Sir Cedric, com voz alta e clara, pronuncia palavras que ecoam no campo de luta: \"CONSIGA A ESPADA. VOCE E O ESCOLHIDO. VOCE DEVE SALVAR A PRINCESA E SALVAR O REINO.\" Sir Cedric cai no chao junto com os cavaleiros, ambos tranformados em po, como os cavaleiros se transformam apos uma derrota, algo que decorre de sua magia negra.\n\n A cena te arrepia, mas voce segue com uma fusao de tristeza e determinacao.\n\n voce chega ao topo do Monte Lumina, carregando as memorias de toda sua jornada.\n\n. Ao chegar ao cume, uma luz iluminada, um ser transcendental, recebe voce. E o Guardiao Raziel, guardiao da espada Luminastra, trazendo um lampejo de esperanca em meio a escuridao.\nAgora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 347, 0, 0, 0);
+    inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.1.2\nA batalha continua ardua, cada movimento e uma danca perigosa. O cavaleiro da Ordem de Nocturia mantem sua ferocidade, desferindo ataques poderosos.\n O combate atinge um apice quando, de repente, Sir Cedric, mesmo gravemente ferido, surge diante de voce. Com bravura, ele enfrenta o ataque do cavaleiro, retribuindo com golpes determinados.\nEm meio aos clamores da batalha, Sir Cedric, com voz alta e clara, pronuncia palavras que ecoam no campo de luta: \"CONSIGA A ESPADA. VOCE E O ESCOLHIDO. VOCE DEVE SALVAR A PRINCESA E SALVAR O REINO.\" Sir Cedric cai no chao desmaiado junto com os cavaleiros, ambos tranformados em po, como os cavaleiros se transformam apos uma derrota, algo que decorre de sua magia negra.\n\n A cena te arrepia, mas voce segue com uma fusao de tristeza e determinacao.\n\n voce chega ao topo do Monte Lumina, carregando as memorias de toda sua jornada.\n\n. Ao chegar ao cume, uma luz iluminada, um ser transcendental, recebe voce. E o Guardiao Raziel, guardiao da espada Luminastra, trazendo um lampejo de esperanca em meio a escuridao.\nAgora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 347, 0, 0, 0);
 
     // decidi nao seguir o atalho do aldeao
     inserir(&history, "Checkpoint 1.2.2.1.2.1.2.1\nVoce decide que e uma armadilha, e desvia do caminho principal para se aproximar do acampamento. A medida que se aproxima, o cenario revela-se ainda mais desolador.O ar esta impregnado com a tensao palpavel da opressao imposta pela Ordem de Nocturia.\nEnquanto voce se apresenta como um defensor do reino, os refugiados compartilham historias angustiantes sobre os abusos que sofreram. Em meio a esses relatos, voce percebe que um cavaleiro da Ordem esta se aproximando, ciente de sua presenca na area.\nEle diz: \"FINALMENTE ENCONTREI VOCE, CACADOR... ESPEREI MUITO POR ESTA BATALHA!!\"\n\n\n", 341, 1, 0, 0);
@@ -193,7 +194,7 @@ int main() {
     inserir(&history, "Checkpoint 1.2.2.1.2.1.1\nAo seguir o atalho do campones, voce e Sir Cedric exploram um caminho misterioso na floresta, cercado pela densa vegetacao e iluminado apenas pela luz filtrada pelas copas das arvores. Durante essa jornada, voce se depara com uma criatura rara, cuja presenca e quase mitologica na regiao.\nEsta criatura, conhecida como \"Luminarca\", e uma especie de ser etereo com pele resplandecente. Enquanto observa a criatura, Sir Cedric percebe que a carne dela tem propriedades especiais. Sir Cedric sugere que, se consumir a carne da Luminarca, voce pode ganhar forca adicional.\nAgora, voce tem duas opcoes: (1) - seguir a criatura para ganhar poder (aumente seu HP maximo em 10)\n(2) - seguir viagem e permitir que o ser misterioso viva livre.\n", 333, 0, 0, 0);
 
     // decidi matar a criatura
-    inserir(&history, "Checkpoint 1.2.2.1.2.1.1.1\nAo optar por cacar a Luminarca e ganhar poder, voce se sente fortalecido pela criatura rara, seu corpo pulsando com uma energia renovada. No entanto, a medida que voce e Sir Cedric se aproximam do Monte Lumina, a aura misteriosa da floresta cede lugar a um ambiente mais sombrio e tenso.\nAo alcancar o Monte Lumina, voce depara-se com uma cena inesperada: um dos lideres do exercito da Ordem de Nocturia esta presente, liderando uma busca pelo mesmo artefato, a espada \"Luminastra\". Sir Cedric, percebendo a ameaca iminente, sugere que voce corra para o monte e busque a espada enquanto ele fica para atrasar o cavaleiro.\nVoce enfrenta uma nova decisao: (1) - ficar e proteger Sir Cedric\n(2) - buscar a espada", 329, 0, 1, 10);
+    inserir(&history, "Checkpoint 1.2.2.1.2.1.1.1\nAo optar por seguir a Luminarca e ganhar poder, voce se sente fortalecido pela criatura rara, seu corpo pulsando com uma energia renovada. No entanto, a medida que voce e Sir Cedric se aproximam do Monte Lumina, a aura misteriosa da floresta cede lugar a um ambiente mais sombrio e tenso.\nAo alcancar o Monte Lumina, voce depara-se com uma cena inesperada: um dos lideres do exercito da Ordem de Nocturia esta presente, liderando uma busca pelo mesmo artefato, a espada \"Luminastra\". Sir Cedric, percebendo a ameaca iminente, sugere que voce corra para o monte e busque a espada enquanto ele fica para atrasar o cavaleiro.\nVoce enfrenta uma nova decisao: (1) - ficar e proteger Sir Cedric\n(2) - buscar a espada", 329, 0, 1, 10);
 
     // decidi nao matar a criatura
     inserir(&history, "Checkpoint 1.2.2.1.2.1.1.2\nAo optar por nao perseguir a  criatura, um elo de simpatia se forma entre voces, e ela decide juntar-se a jornada. Agora, acompanhado pela Luminarca e Sir Cedric, voces avancam pela trilha em busca da preciosa espada Luminastra. O cenario ao redor revela um rastro devastador deixado pelos Cavaleiros da Ordem de Nocturia. Entretanto, ao avistar uma luz, um sentimento de alegria e uma aurea de felicidade despertam em voces. A luz e o Guardiao Raziel, protetor da espada Luminastra.\nAgora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...\n", 334, 0, 0, 0);
@@ -202,10 +203,10 @@ int main() {
     inserir(&history, "Checkpoint 1.2.2.1.2.1.1.1.1\nVoce opta por ficar e proteger o Sir Cedric.\nSir Cedric diz para voce com tom de raiva, mas tambem de alivio: PARA UM CACADOR DE RECOMPENSAS VOCE NAO EH TAO ESPERO, HAHAH. DEVERIA TER IDO BUSCAR A ESPADA!\nMas, de repente o cavaleiro ataca voces.\nSEQUENCIA DE COMBATE INICIADA", 327, 1, 0, 0);
     
     inserir(&history, "Checkpoint 1.2.2.1.2.1.1.1.1.1\nFIM DE JOGO!\n", 326, 0, -10000, 0);
-    inserir(&history, "Checkpoint 1.2.2.1.2.1.1.1.1.1\nA batalha continua ardua, cada movimento e uma danca perigosa. O cavaleiro da Ordem de Nocturia mantem sua ferocidade, desferindo ataques mortais. O combate atinge um apice quando, de repente, Sir Cedric, mesmo gravemente ferido, surge diante de voce. Com bravura, ele enfrenta o ataque do cavaleiro, retribuindo com golpes determinados.\nEm meio aos clamores da batalha, Sir Cedric, com voz alta e clara, pronuncia palavras que ecoam no campo de luta: \"CONSIGA A ESPADA. VOCE E O ESCOLHIDO. VOCE DEVE SALVAR A PRINCESA E SALVAR O REINO.\" Sir Cedric cai no chao junto com os cavaleiros. Estes estao ambos tranformados em po, como transforma-se todos os cavaleiros de nocturia, apos uma derrota, algo decorrente de sua magia negra.\n\n A cena te arrepia, mas voce segue com uma mistura de tristeza e determinacao.\n\n voce chega ao topo do Monte Lumina, carregando as memorias de toda sua jornada\n\n. Ao chegar ao cume, uma luz iluminada, um ser transcendental, recebe voce. E o Guardiao Raziel, guardiao da espada Luminastra, trazendo um lampejo de esperanca em meio a escuridao.\nAgora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 328, 0, 0, 0);
+    inserir(&history, "Checkpoint 1.2.2.1.2.1.1.1.1.1\nA batalha continua ardua, cada movimento e uma danca perigosa. O cavaleiro da Ordem de Nocturia mantem sua ferocidade, desferindo ataques poderosos. O combate atinge um apice quando, de repente, Sir Cedric, mesmo gravemente ferido, surge diante de voce. Com bravura, ele enfrenta o ataque do cavaleiro, retribuindo com golpes determinados.\nEm meio aos clamores da batalha, Sir Cedric, com voz alta e clara, pronuncia palavras que ecoam no campo de luta: \"CONSIGA A ESPADA. VOCE E O ESCOLHIDO. VOCE DEVE SALVAR A PRINCESA E SALVAR O REINO.\" Sir Cedric cai no chao junto com os cavaleiros, desmaiado. Estes estao ambos tranformados em po, como transforma-se todos os cavaleiros de nocturia, apos uma derrota, algo decorrente de sua magia negra.\n\n A cena te arrepia, mas voce segue com uma mistura de tristeza e determinacao.\n\n voce chega ao topo do Monte Lumina, carregando as memorias de toda sua jornada\n\n. Ao chegar ao cume, uma luz iluminada, um ser transcendental, recebe voce. E o Guardiao Raziel, guardiao da espada Luminastra, trazendo um lampejo de esperanca em meio a escuridao.\nAgora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 328, 0, 0, 0);
 
     // decidi fugir
-    inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.2\nAo escolher buscar a espada, voce ignora a angustia de deixar Sir Cedric enfrentando os cavaleiros da Ordem sozinho. Ao chegar ao topo do Monte Lumina, uma visao terrivel segue a distancia: Sir Cedric foi capturado pelos cavaleiros!.\nA impotencia da situacao pesa em seu coracao.\nA dor emocional e profunda, mas voce sabe que focar em sua missao e essencial para honrar seu leal companheiro.\nAcima da montanha, revela-se um ser mitico, o Guardiao Raziel, protetor da espada \"Luminastra\". Agora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 330, 0, 1, 0);
+    inserir(&history, "Checkpoint 1.2.2.1.2.1.2.2.2\nAo escolher buscar a espada, voce ignora deixar Sir Cedric enfrentando os cavaleiros da Ordem sozinho. Ao chegar ao topo do Monte Lumina, uma visao terrivel segue a distancia: Sir Cedric foi capturado pelos cavaleiros!.\nA impotencia da situacao pesa em seu coracao.\nA dor emocional e profunda, mas voce sabe que focar em sua missao e essencial para honrar seu leal companheiro.\nAcima da montanha, revela-se um ser mitico, o Guardiao Raziel, protetor da espada \"Luminastra\". Agora, diante dessa entidade celestial, sua missao atinge um ponto crucial.\nSeus olhos humanos mal conseguem compreender a magnitude dessa presenca:\n O ser celestial, com sua forma indescritivel, e coberto por inumeras asas resplandecentes que se estendem como um manto de luz.\n Suas penas irradiam cores que vao alem do espectro visivel, criando uma aura hipnotizante de cintilantes matizes que dancam em harmonia.\nSua figura e eterea e sublime, impossivel de ser completamente apreendida pela mente humana.\n\n O ser olha para voce com olhos que parecem conter o conhecimento de todas as eras e galaxias, e sua voz e uma sinfonia celestial que ressoa em sua alma.\n\"OH, DESTEMIDO VIAJANTE, OUSASTE TU ESCALARES O MAJESTOSO MONTE LUMINA EM BUSCA DA LENDARIA ESPADA LUMINASTRA?\", diz o ser celestial.\n\n \"SOU O GUARDIAO VIGILANTE DESTA AREA SAGRADA E O ENVIADO CELESTIAL.\n SAIBA, DISTINTO BUSCADOR DE SONHOS, QUE ANTES DE TE CONCEDER A HONRA DE EMPUNHAR A ESPADA, TU SERAS SUBMETIDO A UMA ESCRUPULOSA AVALIACAO.\nPOIS, DELICADAMENTE, DEVO RESSALTAR QUE MINHA NATUREZA E A DE UM CHERUBIM, UM SER DESIGNADO PARA A PROTECAO DE RELIQUIAS DIVINAS, E ASSIM, A ENTREGA DESTA NOBRE RELIQUIA CARECE DE UMA ESCOLHA REFINADA E PRECISA.\"\n\nA aura divina do ser envolve voce, e voce sente que esta diante de um julgamento que ultrapassa as palavras e os desafios.\n Seu coracao palpita com expectativa.\n\nA decisao sobre sua dignidade e proposito esta nas maos do ser celestial, cuja compreensao vai alem do humano.\n\nA avaliacao esta prestes a comecar...", 330, 0, 1, 0);
     
     while (1) {
         karma = 0;
@@ -261,21 +262,23 @@ int main() {
                 jogador[strcspn(jogador, "\n")] = '\0';
 
                 clear();
+                system("color 0E");
                 printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
-                sleep(2);
+                sleep(4);
                 clear();
                 printf("DESESPERO!\n");
-                sleep(1);
+                sleep(2);
                 printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
-                sleep(4);
+                sleep(5);
                 printf("A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
-                sleep(4);
+                sleep(5);
                 printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
-                sleep(4);
-                printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e dado poder  de cavaleiro pelo rei e convocado a embarcar em uma jornada epica...\n");
-                sleep(10);
+                sleep(5);
+                printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e dado poder de cavaleiro pelo rei e convocado a embarcar em uma jornada epica...\n");
+                sleep(16);
                 clear();
                 sleep(1);
+                system("color 0F");
                 
 
                 idLastNode = game(&history);
@@ -326,8 +329,30 @@ int main() {
                     }
                 } else {
                     // aqui eh o final normal. karma >= 0 e karma < 2. ganha espada
-                    printf("\n\nPARABENS, %s! VOCE TOMOU BOAS DECISOES E CONSEGUIU A ESPADA!\n\n Voce chega ao Castelo de Eldia!\n Prepare-se para o boss final!", jogador);
-                    sleep(5);
+                    printf("\n\nPARABENS, %s! VOCE TOMOU BOAS DECISOES E CONSEGUIU A ESPADA!\n\n ", jogador);
+                    printf("\n\
+                  /\\ \n\
+                 |  |\n\
+                 |  |\n\
+                 |  |\n\
+     /\\          |  |\n\
+    /  \\         |  |\n\
+   |----|        |  |\n\
+    \\  /         |  |\n\
+     \\/          |  |\n\
+                 |  |\n\
+                 |  |\n\
+                 |  |\n\
+            _______________\n\
+                 |  |\n\
+                 |  |\n\
+                 |  |\n\
+                ______\n\
+\n\
+");
+                    sleep(7);
+                    printf("Voce chega ao castelo de Eldia! Prepare-se para o boss final.!\n");
+                    sleep(3);
                     clear();
                     Oponente DragaoRelgar;    
                     DragaoRelgar.hp = 999;
@@ -336,12 +361,14 @@ int main() {
                             clear();
                             sleep(2);
                             printf("\nYOU WIN!");
-                            sleep(10);
+                            sleep(5);
                             break;
                         }
                         else{
+                            sleep(2);
+                            clear();
                             printf("\nYOU LOSE!");
-                            sleep(10);
+                            sleep(5);
                             break;
                         }
                 }
@@ -436,7 +463,7 @@ int game(Arv **t){
         if((*t)->hpIncrease) hpPlayer = hpPlayer + (*t)->hpIncrease;
         if ((*t)->combatFlag == 1){
             printf("\nPREPARE-SE PARA COMBATE\n");
-            if(combat(hpPlayer, elfo)){
+            if(combat(hpPlayer, elfo, 1)){
                 lastVisitedNode = game(&((*t)->dir));
             }else{
                 lastVisitedNode = game(&((*t)->esq));
@@ -482,8 +509,15 @@ void clear(){
             system("clear");
         #endif
 }
-int combat (int seuHp, Oponente oponente){
-    sleep(10);
+int combat (int seuHp, Oponente oponente, int waitFlag){
+    if (waitFlag == 1){
+        
+     
+    }
+    else{
+     sleep(2);
+    }
+    
     clear();
     int numeroAleatorio;
     int danoTomado,hpRecuperado;
@@ -499,20 +533,27 @@ int combat (int seuHp, Oponente oponente){
             "Com um grunhido ameacador, %s se prepara para mais um round de combate.\n\n",
             "%s mantem sua postura, observando cada um de seus movimentos atentamente.\n\n",
             "Voce sente a tensao no ar enquanto %s se prepara para o proximo ataque.\n\n",
-            "%s parece imperturbavel, pronto para desferir outro golpe mortal.\n\n"
+            "%s parece imperturbavel, pronto para desferir outro golpe poderoso.\n\n"
     };
     while (seuHp>0){
+            system("color 0C");
+            
             if (oponente.hp<=0){
               sleep(3);
               clear();
               printf("BATALHA GANHA!\n\n");
               sleep(3);
               clear();
-                hpPlayer = seuHp; 
+                hpPlayer = seuHp;
+                system("color 0F"); 
               return 1;
             }      
+            
+            system("color 0A");
             printf("Seu HP:%d\n",seuHp);
-            printf("Hp inimigo: %d\n\n",oponente.hp);      
+            system("color 0C");
+            printf("Hp inimigo: %d\n\n",oponente.hp); 
+                 
             char dialogoPersonalizado[300];
             numeroAleatorio = gerarNumeroAleatorio(0,8);
             sprintf(dialogoPersonalizado, vetorDialogo[numeroAleatorio],oponente.nome);
@@ -563,7 +604,7 @@ int combat (int seuHp, Oponente oponente){
             }
         }else{
               danoTomado = gerarNumeroAleatorio(3,8);
-              printf("Voce nao atacou a tempo! O oponente desfere um golpe mortal!\n");
+              printf("Voce nao atacou a tempo! O oponente desfere um golpe poderosol!\n");
               seuHp = seuHp - danoTomado;
         } 
     }
@@ -574,6 +615,7 @@ int combat (int seuHp, Oponente oponente){
         sleep(3);
         clear();
         hpPlayer = seuHp;
+        system("color 0F"); 
         return 0;
     }
 }
@@ -697,23 +739,26 @@ int combatfinal(int seuHp, Oponente oponente) {
     }
     char passwordArray [3][10] = {"ataque","golpe","impacto"};
     while (seuHp>0){
+            system("color 0D");
             if (oponente.hp<=0){
               sleep(2);
-              printf("Antes do seu fim, %s invoca 2 suditos com sua ultima faisca de poder!",oponente.nome);
+              printf("Antes do seu fim, %s invoca 2 suditos com sua ultima faisca de poder! Eles lentamente se aproximam de voce...",oponente.nome);
               Oponente sudito;
               strcpy(sudito.nome ,"Sudito");
               sudito.hp = 7;
-              sleep(4);
+              sleep(6);
               clear();
-              if (combat(10,sudito)){
-                clear();
-                if(combat(10,sudito)){
+              if (combat(10,sudito,0)){
+                if(combat(10,sudito,0)){
+                  system("color 0F");
                   return 1;
                 }
                 else{
+                  system("color 0F");
                   return 0;
                 }
               }else{
+                system("color 0F");
                 return 0;
               }
             }      
@@ -796,15 +841,17 @@ int combatfinal(int seuHp, Oponente oponente) {
             }
         }else{
               danoTomado = gerarNumeroAleatorio(3,8);
-              printf("Voce nao atacou a tempo! O oponente desfere um golpe mortal!\n");
+              printf("Voce nao atacou a tempo! O oponente desfere um golpe poderoso!\n");
               seuHp = seuHp - danoTomado;
         } 
     }
     }
     }
-    if (seuHp<0){
+    if (seuHp<=0){
+        system("color 0F");
         return 0;
     }if (oponente.hp<=0){
+        system("color 0F");
         return 1;
     }
 }
