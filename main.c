@@ -511,7 +511,7 @@ void clear(){
 }
 int combat (int seuHp, Oponente oponente, int waitFlag){
     if (waitFlag == 1){
-        
+        sleep(30);
      
     }
     else{
