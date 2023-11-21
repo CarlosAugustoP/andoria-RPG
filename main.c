@@ -304,13 +304,11 @@ int main() {
                             printf("YOU WIN!");
                             fflush(stdout);
                             sleep(10);
-                            break;
                         }
                         else{
                             printf("YOU LOSE!");
                             fflush(stdout);
                             sleep(10);
-                            break; 
                         }
                     }else{
                         printf("\n\n Voce chega a Floresta de Nocturia!\n Prepare-se para o boss final, %s!", jogador);
@@ -325,13 +323,11 @@ int main() {
                             printf("YOU WIN!");
                             fflush(stdout);
                             sleep(10);
-                            break;
                         }
                         else{
                             printf("YOU LOSE!");
                             fflush(stdout);
                             sleep(10);
-                            break;
                         }
                     }
                 } else {
@@ -369,14 +365,12 @@ int main() {
                             sleep(2);
                             printf("YOU WIN!");
                             sleep(5);
-                            break;
                         }
                         else{
                             sleep(2);
                             clear();
                             printf("YOU LOSE!");
                             sleep(5);
-                            break;
                         }
                 }
 

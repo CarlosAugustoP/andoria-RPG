@@ -23,3 +23,5 @@ asddsa - 221
 carlos - 150
 mung - 99
 a - 92
+CARLAO - 150
+das - 361
