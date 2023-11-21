@@ -45,6 +45,8 @@ int combatfinal(int seuHp, Oponente oponente);
 void libere(Arv* raiz) ;
 
 int main() {
+    
+                                    
     int opcao;
     char jogador[100];
     int idLastNode = -1;
@@ -214,17 +216,17 @@ int main() {
 
         clear();
  
-        printf(" /   /   /   /   /   /   /   /   /   /   /\n");
+        printf("\033[1;33m /   /   /   /   /   /   /   /   /   /   /\n");
         printf("/   /   /   /   /   /   /   /   /   /   /   /\n");
         printf("A   N   D   O   R   I   A\n");
         printf(" /   /   /   /   /   /   /   /   /   /   /   /\n");
-        printf("/   /   /   /   /   /   /   /   /   /   /   /\n");
+        printf("/   /   /   /   /   /   /   /   /   /   /   /\n\033[0m");
         
-        printf("1 - Entrar no jogo\n");
+        printf("\033[1;37;3m1 - Entrar no jogo\n");
         printf("2 - Visualizar ultima trajetoria\n");
-        printf("3 - Histórias passadas\n");
-        printf("4 - Sair\n");
-        
+        printf("3 - Historias passadas\n");
+        printf("4 - Sair\033[0m\n");
+
         Oponente oponente;
 
         FILE *file;
@@ -249,7 +251,7 @@ int main() {
 
         bubblesortByName(&head);
 
-        printf("Escolha uma opcao: ");
+        printf("\033[1;33;3mEscolha uma opcao: \033[0m");
         scanf("%d", &opcao);
 
         switch (opcao) { 
@@ -264,24 +266,24 @@ int main() {
                 
                 jogador[strcspn(jogador, "\n")] = '\0';
 
-                clear();
-                system("color 0E");
-                printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
-                sleep(4);
-                clear();
-                printf("DESESPERO!\n");
-                sleep(2);
-                printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
-                sleep(5);
-                printf("A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
-                sleep(5);
-                printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
-                sleep(5);
-                printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e dado poder de cavaleiro pelo rei e convocado a embarcar em uma jornada epica...\n");
-                sleep(16);
-                clear();
-                sleep(1);
-                system("color 0F");
+                // clear();
+                // system("color 0E");
+                // printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
+                // sleep(4);
+                // clear();
+                // printf("DESESPERO!\n");
+                // sleep(2);
+                // printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
+                // sleep(5);
+                // printf("A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
+                // sleep(5);
+                // printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
+                // sleep(5);
+                // printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e dado poder de cavaleiro pelo rei e convocado a embarcar em uma jornada epica...\n");
+                // sleep(16);
+                // clear();
+                // sleep(1);
+                // system("color 0F");
                 
 
                 idLastNode = game(&history);
@@ -289,7 +291,7 @@ int main() {
                 if(karma < 0) printf ("\n\nJOGUE NOVAMENTE!\n"); // aqui eh caso o usuario tenha perdido um combate
                 else if(karma >= 2){
                     if(karma < 1000){
-                        printf("\n\nVOCE TOMOU %d DECISOES ERRADAS DURANTE SUA TRAJETORIA, %s! VOCE NAO CONSEGUIU A ESPADA!\n", karma, jogador);
+                        printf("\n\nVOCE TOMOU %d DECISOES ERRADAS DURANTE SUA TRAJETORIA, %s! VOCE NAO CONSEGUIU A ESPADA!\nPressione qualquer tecla para continuar...", karma, jogador);
                         // aqui eh caso o usuario tenha tomado decisoes erradas e karma > 2, nao ganha espada
                     } else if (karma < 3000) {
                         printf("\n\n Voce chega ao Monte Lumina!\n Prepare-se para o boss final, %s!", jogador);
@@ -301,12 +303,12 @@ int main() {
                         if(combatfinal(hpPlayer,GuardiaoRaziel)){
                             clear();
                             sleep(2);
-                            printf("YOU WIN!");
+                            printf("YOU WIN! Pressione qualquer tecla para continuar...");
                             fflush(stdout);
                             sleep(10);
                         }
                         else{
-                            printf("YOU LOSE!");
+                            printf("YOU LOSE! Pressione qualquer tecla para continuar...");
                             fflush(stdout);
                             sleep(10);
                         }
@@ -320,12 +322,12 @@ int main() {
                         if(combatfinal(hpPlayer,LordMorgator)){
                             clear();
                             sleep(2);
-                            printf("YOU WIN!");
+                            printf("YOU WIN! Pressione qualquer tecla para continuar...");
                             fflush(stdout);
                             sleep(10);
                         }
                         else{
-                            printf("YOU LOSE!");
+                            printf("YOU LOSE! Pressione qualquer tecla para continuar...");
                             fflush(stdout);
                             sleep(10);
                         }
@@ -333,26 +335,29 @@ int main() {
                 } else {
                     // aqui eh o final normal. karma >= 0 e karma < 2. ganha espada
                     printf("\n\nPARABENS, %s! VOCE TOMOU BOAS DECISOES E CONSEGUIU A ESPADA!\n\n ", jogador);
+                    printf("\033[1;33m"); // Set text color to gold
+                     printf("\033[1;33m"); // Set text color to gold
                     printf("\n\
-                  /\\ \n\
-                 |  |\n\
-                 |  |\n\
-                 |  |\n\
-     /\\          |  |\n\
-    /  \\         |  |\n\
-   |----|        |  |\n\
-    \\  /         |  |\n\
-     \\/          |  |\n\
-                 |  |\n\
-                 |  |\n\
-                 |  |\n\
-            _______________\n\
-                 |  |\n\
-                 |  |\n\
-                 |  |\n\
-                ______\n\
-\n\
-");
+                                                       /\\ \n\
+                                                      |  |\n\
+                                                      |  |\n\
+                                                      |  |\n\
+                                            /\\        |  |\n\
+                                            /  \\      |  |\n\
+                                           |----|     |  |\n\
+                                            \\  /      |  |\n\
+                                            \\/        |  |\n\
+                                                      |  |\n\
+                                                      |  |\n\
+                                                      |  |\n\
+                                                  ____________\n\
+                                                      |  |\n\
+                                                      |  |\n\
+                                                      |  |\n\
+                                                     _____\
+                                        \n\
+                                        ");
+                    printf("\033[0m"); // Reset text color to default
                     sleep(7);
                     printf("Voce chega ao castelo de Eldia! Prepare-se para o boss final, %s!\n", jogador);
                     sleep(3);
@@ -363,13 +368,13 @@ int main() {
                     if(combatfinal(hpPlayer,DragaoRelgar)){
                             clear();
                             sleep(2);
-                            printf("YOU WIN!");
+                            printf("YOU WIN! Pressione qualquer tecla para continuar...");
                             sleep(5);
                         }
                         else{
                             sleep(2);
                             clear();
-                            printf("YOU LOSE!");
+                            printf("YOU LOSE! Pressione qualquer tecla para continuar...");
                             sleep(5);
                         }
                 }
@@ -401,7 +406,7 @@ int main() {
 
                 printLastPlayers(head);
 
-                printf("Escolha o codigo ao lado do jogador que voce deseja visualizar sua trajetoria: ");
+                printf("\033[1;33;3mEscolha o codigo ao lado do jogador que voce deseja visualizar sua trajetoria: \033[0m");
                 scanf("%d", &codigo);
 
                 busca(history, codigo);
@@ -421,15 +426,22 @@ int main() {
 }
 
 void busca(Arv *aux, int n) {
+    clear();
     printf("%s\n", aux->texto);
     if (aux == (Arv *)NULL)
         return;
     if (aux->id == n)
         return;
-    if (n < aux->id)
+    if (n < aux->id){
+        printf("\033[1;33;3m\nPRESSIONE QUALQUER TECLA PARA VER SEU PROXIMO PASSO!\033[0m\n");
+        getch();
         busca(aux->esq, n);
-    else
+    }else{
+        printf("\033[1;33;3m\nPRESSIONE QUALQUER TECLA PARA VER SEU PROXIMO PASSO!\033[0m\n");
+        getch();
         busca(aux->dir, n);
+    }
+
 }
 
 void inserir(Arv **t, char* texto, int id, int combatFlag, int karma, int hpIncrease) {
@@ -456,10 +468,10 @@ void inserir(Arv **t, char* texto, int id, int combatFlag, int karma, int hpIncr
 int game(Arv **t){
     int lastVisitedNode = -1;
     Oponente elfo;
-    elfo.hp = 1;
+    elfo.hp = 8;
     strcpy(elfo.nome,"Inimigo");
     if(*t != NULL){
-        printf("%s\n", (*t)->texto);
+        printf("\033[1;34m%s\033[0m\n", (*t)->texto);
         if((*t)->karma) karma = karma + (*t)->karma;
         if((*t)->hpIncrease) hpPlayer = hpPlayer + (*t)->hpIncrease;
         if ((*t)->combatFlag == 1){
@@ -471,11 +483,13 @@ int game(Arv **t){
             }
         } else if((*t)->esq != NULL || (*t)->dir != NULL){
             //sleep(6);
-            printf("\nINSIRA SUA ESCOLHA: ");
+            printf("\n");
+            printf("\033[1;32mHP atual: %d\033[0m", hpPlayer);
+            printf("\033[1;3;5m\nINSIRA SUA ESCOLHA: \033[0m");
 
             do{
                 scanf("%d", &choice);
-                if(choice != 1 && choice != 2) printf("\nCOMANDO INVALIDO! INSIRA SUA ESCOLHA NOVAMENTE: ");
+                if(choice != 1 && choice != 2) printf("\033[1;33;3m\nCOMANDO INVALIDO! INSIRA SUA ESCOLHA NOVAMENTE: \033[0m");
             } while (choice != 1 && choice != 2);
     
             if(choice == 1){
@@ -488,7 +502,7 @@ int game(Arv **t){
                 lastVisitedNode = game(&((*t)->dir));
             }
         } else {
-            printf("\nFIM DO JOGO\n\nPRESSIONE QUALQUER TECLA PARA CONTINUAR");
+            printf("\033[1;33;3m\n\033[3m\033[33mFIM DO JOGO INTERATIVO!\033[0m\n\n\033[1;33;3mPRESSIONE QUALQUER TECLA PARA CONTINUAR\033[0m");
             getch();
             lastVisitedNode = (*t)->id;
         }
