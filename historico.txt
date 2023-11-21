@@ -31,3 +31,4 @@ oiii - 68
 ei - 150
 ele - 99
 carlinhos - 99
+a - 150

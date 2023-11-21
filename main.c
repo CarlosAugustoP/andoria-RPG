@@ -266,24 +266,24 @@ int main() {
                 
                 jogador[strcspn(jogador, "\n")] = '\0';
 
-                // clear();
-                // system("color 0E");
-                // printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
-                // sleep(4);
-                // clear();
-                // printf("DESESPERO!\n");
-                // sleep(2);
-                // printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
-                // sleep(5);
-                // printf("A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
-                // sleep(5);
-                // printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
-                // sleep(5);
-                // printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e dado poder de cavaleiro pelo rei e convocado a embarcar em uma jornada epica...\n");
-                // sleep(16);
-                // clear();
-                // sleep(1);
-                // system("color 0F");
+                 clear();
+                system("color 0E");
+                 printf("Para a visibilidade de todo o texto, sugerimos aumentar o tamanho do terminal\n");
+                 sleep(4);
+                 clear();
+                 printf("DESESPERO!\n");
+                 sleep(2);
+                 printf("Em meio a escuridao da noite, no majestoso reino de Andoria, um ato nefasto abalou a tranquilidade do humilde povo!\n");
+                 sleep(5);
+                 printf("A destemida PRINCESA MELINDA, herdeira do trono, foi capturada por uma forca maligna conhecida como A ORDEM DE NOCTURIA , Deixando o reino inteiro a beira do abismo!\n");
+                 sleep(5);
+                 printf("Desesperado, o sabio REI TRISTAN convoca o mais improvavel dos herois, alguem destinado a trazer a luz de volta a sua amada terra.\n");
+                 sleep(5);
+                 printf("Voce, o ultimo raio de esperanca do reino, um CACADOR DE RECOMPENSA e dado poder de cavaleiro pelo rei e convocado a embarcar em uma jornada epica...\n");
+                 sleep(16);
+                 clear();
+                 sleep(1);
+                 system("color 0F");
                 
 
                 idLastNode = game(&history);
